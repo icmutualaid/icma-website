@@ -43,8 +43,8 @@ If you are not an ICMA member, how did you find this page? Contact us if you're 
 
 1. `git clone https://github.com/icmutualaid/icma-website.git`
 2. create a python venv (in vscode, `Python > Create Environment…`) and install dependencies from requirements.txt (vscode will prompt; otherwise, `python3 -m pip3 install requirements.txt`)
-3. initialize the db: `flask --app flaskr init-db`
-4. start the webserver: `flask --app flaskr init-db`
+3. initialize the db: `flask --app blog init-db`
+4. start the webserver: `flask --app blog init-db`
 
 ## Technical Specifications
 
@@ -65,7 +65,7 @@ Here is an outline of the file structure you'll see while working on the project
 
 ```
 icma-website/
-  flaskr/              source code for the app
+  blog/              source code for the app
   instance/            contains the website's db (git ignored)
   .gitignore           instructs your git client to ignore certain files when committing
 ```
