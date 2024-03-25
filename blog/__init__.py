@@ -9,18 +9,11 @@ def create_app(test_config=None):
 
     _init_instance(app)
     _init_db(app)
-    _init_auth(app)
 
-    _init_routing(app)
-
-    return app
-
-
-def _init_auth(app):
-    from . import auth
-    app.register_blueprint(auth.bp)
+    _init_route(app)
 
     return app
+
 
 
 # ensure the instance folder exists
@@ -52,8 +45,17 @@ def _init_db(app):
 
 
 # route the request
-def _init_routing(app):
-    # a simple page that says hello
+def _init_route(app):
+    # hello world page
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
+
+    # register the auth blueprint with a url prefix defined in auth.py
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    # register the blog blueprint at the site root
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')

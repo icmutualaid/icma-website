@@ -65,9 +65,11 @@ Here is an outline of the file structure you'll see while working on the project
 
 ```
 icma-website/
-  blog/              source code for the app
-  instance/            contains the website's db (git ignored)
-  .gitignore           instructs your git client to ignore certain files when committing
+  blog/             source code for the app
+    static/         static files, like CSS
+    templates/      HTML templates
+  instance/         contains the website's db (git ignored)
+  .gitignore        instructs your git client to ignore certain files when committing
 ```
 
 The `instance/` directory will appear when you run the project. This won't and shouldn't be added to your commits.
