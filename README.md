@@ -10,7 +10,7 @@ We do this because the conditions in which we are made to live are unjust. Our l
 
 We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
 
-You may contact us via email (see our profile @icmutualaid) or on our social media platforms:
+You may contact us via email (see our profile [@icmutualaid](https://github.com/icmutualaid)) or on our social media platforms:
 
 - Instagram: [@icmutualaid](https://www.instagram.com/icmutualaid)
 - Twitter: [@icmutualaid](https://twitter.com/icmutualaid)
@@ -33,13 +33,13 @@ Then, we'll decide on wiki software and implement it. We'll either include that 
 
 ## Contributing
 
-If you are an ICMA member, ask someone on the IT committee to add your GitHub account as a contributor on the project, or if you have the @icmutualaid GitHub credentials, do it yourself on [this project's Settings page](https://github.com/icmutualaid/icma-website/settings/).
+If you are an ICMA member, ask someone on the IT committee to add your GitHub account as a contributor on the project, or if you have the [@icmutualaid](https://github.com/icmutualaid) GitHub credentials, do it yourself on [this project's Settings page](https://github.com/icmutualaid/icma-website/settings/).
 
-Please make your git commits using your own GitHub account, **not** the @icmutualaid account.
+Please make your git commits using your own GitHub account, **not** the [@icmutualaid](https://github.com/icmutualaid) account.
 
 If you are not an ICMA member, how did you find this page? Contact us if you're curious!
 
-## Installation
+### Installation
 
 1. `git clone https://github.com/icmutualaid/icma-website.git`
 2. create a python venv (in vscode, `Python > Create Environment…`) and install dependencies from requirements.txt (vscode will prompt; otherwise, `python3 -m pip3 install requirements.txt`)
