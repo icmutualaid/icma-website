@@ -1,5 +1,6 @@
 import functools
 
+import click
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
@@ -11,29 +12,29 @@ from blog.db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-# associate the url /register with the register view function
-@bp.route('/register', methods=('GET', 'POST'))
-def register():
-    if request.method == 'POST':
-        # request.form is a dict that maps submitted form keys and values
-        username = request.form['username']
-        password = request.form['password']
+# # associate the url /register with the register view function
+# @bp.route('/register', methods=('GET', 'POST'))
+# def register():
+#     if request.method == 'POST':
+#         # request.form is a dict that maps submitted form keys and values
+#         username = request.form['username']
+#         password = request.form['password']
 
-        error = validate_credentials(username, password)
+#         error = validate_credentials(username, password)
 
-        # insert a user with these credentials
-        if error is None:
-            db = get_db()
-            try:
-                create_user(db, username, password)
-            except db.IntegrityError:
-                error = f'User {username} is already registered.'
-            else:
-                return redirect(url_for('auth.login'))
+#         # insert a user with these credentials
+#         if error is None:
+#             db = get_db()
+#             try:
+#                 create_user(db, username, password)
+#             except db.IntegrityError:
+#                 error = f'User {username} is already registered.'
+#             else:
+#                 return redirect(url_for('auth.login'))
 
-        flash(error)
+#         flash(error)
 
-    return render_template('auth/register.html')
+#     return render_template('auth/register.html')
 
 
 # associate the url /login with the login view function
@@ -112,6 +113,30 @@ def create_user(db, username, password):
                     (username, generate_password_hash(password)),
                 )
     db.commit()
+
+
+# Register a cli command to manually add a blog user
+@click.command('create-user')
+@click.argument('username')
+@click.argument('password')
+def create_user_command(username, password):
+    error = validate_credentials(username, password)
+
+    # insert a user with these credentials
+    if error is None:
+        db = get_db()
+        try:
+            create_user(db, username, password)
+            click.echo(f'Successfully registered user {username}.')
+        except db.IntegrityError:
+            click.echo(f'Error: User {username} is already registered.')
+    else:
+        click.echo(f'Error: {error}')
+
+
+def init_app(app):
+    # define the create-user cli command
+    app.cli.add_command(create_user_command)
 
 
 def validate_credentials(username, password):

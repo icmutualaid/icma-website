@@ -1,36 +1,34 @@
 import pytest
 from flask import g, session
-from blog.db import get_db
+
+from blog.auth import create_user_command
 
 
-# The register view should render successfully on GET.
-# On POST with valid form data, it should redirect to the login URL
-# and the user’s data should be in the database.
-def test_register(client, app):
-    assert client.get('/auth/register').status_code == 200
-    response = client.post(
-        '/auth/register', data={'username': 'a', 'password': 'a'}
-    )
-    assert response.headers["Location"] == "/auth/login"
+# The create-user command should call create_user function and echo a message.
+def test_create_user_command(runner, monkeypatch):
+    class Recorder(object):
+        called = False
 
-    with app.app_context():
-        assert get_db().execute(
-            "SELECT * FROM user WHERE username = 'a'",
-        ).fetchone() is not None
+    def fake_create_user():
+        Recorder.called = True
+
+    monkeypatch.setattr('blog.auth.create_user', fake_create_user)
+    result = runner.invoke(
+        args=['create-user', 'testusername', 'testpassword']
+        )
+    assert 'Successfully registered' in result.output
+    assert Recorder.called
 
 
 # Invalid data should display error messages.
 @pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('', '', b'Username is required.'),
-    ('a', '', b'Password is required.'),
-    ('test', 'test', b'already registered'),
+    ('', '', 'Username is required.'),
+    ('a', '', 'Password is required.'),
+    ('test', 'test', 'already registered'),
 ))
-def test_register_validate_input(client, username, password, message):
-    response = client.post(
-        '/auth/register',
-        data={'username': username, 'password': password}
-    )
-    assert message in response.data
+def test_validate_credentials(client, username, password, message):
+    validation_message = create_user_command(username, password)
+    assert message in validation_message
 
 
 # The tests for the login view are very similar to those for register.
