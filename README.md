@@ -25,9 +25,11 @@ The site is not yet ready for the public. We expect to go live sometime in April
 
 ## Roadmap
 
-Currently, we're following along with [the Flask tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/)!
+We've stolen some basic blogging features from [the Flask tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/).
 
-Then, we'll customize the website's appearance, audit it for accessibility, deploy it on our webserver, and get the blog up and running.
+We should improve upon these features by swapping out the plain text blog interface with a feature-rich WYSIWYG like CKEditor.
+
+We need to customize the website's appearance, audit it for accessibility, deploy it on our webserver, and get the blog up and running.
 
 Then, we'll decide on wiki software and implement it. We'll either include that software in this project or host it separately and include a link.
 

@@ -15,7 +15,6 @@ def create_app(test_config=None):
     return app
 
 
-
 # ensure the instance folder exists
 def _init_instance(app):
     try:
