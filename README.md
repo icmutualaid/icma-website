@@ -1,3 +1,5 @@
+![linter](https://github.com/icmutualaid/icma-website/actions/workflows/python-app.yml/badge.svg)
+
 # About Our Organization
 
 We are IC Mutual Aid. 
