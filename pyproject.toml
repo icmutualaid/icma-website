@@ -3,9 +3,16 @@ name = "blog"
 version = "1.0.0"
 description = "Source for the ICMA collective's website."
 dependencies = [
+    # Web server
     "flask",
+    # Forms
+    "flask-ckeditor[all]",
+    # "wtforms", # we should use this eventually for validation etc
+    # Tests
     "pytest",
     "coverage",
+    # Other
+    "bleach", # for the flask_ckeditor.utils.cleanify polyfill in blog.py, remove when flask.ckeditor>=0.5.2
 ]
 
 [build-system]
