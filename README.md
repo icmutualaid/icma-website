@@ -43,10 +43,13 @@ If you are not an ICMA member, how did you find this page? Contact us if you're 
 
 ### Installation
 
-1. `git clone https://github.com/icmutualaid/icma-website.git`
-2. create a python venv (in vscode, `Python > Create Environment…`) and install dependencies from requirements.txt (vscode will prompt; otherwise, `python3 -m pip3 install requirements.txt`)
+1. download the project: `git clone https://github.com/icmutualaid/icma-website.git`
+2. create a python venv (in vscode, `Python > Create Environment…`) and install dependencies (vscode will do this automatically; otherwise, `pip install -e .`)
 3. initialize the db: `flask --app blog init-db`
-4. start the webserver: `flask --app blog init-db`
+4. add an admin user: `flask --app blog create-user myusername mypassword`
+5. start the webserver in debug mode: `flask --app blog run --debug`
+
+To manually run tests: `coverage run -m pytest`
 
 ## Technical Specifications
 

@@ -1,36 +1,36 @@
 import pytest
 from flask import g, session
-from blog.db import get_db
+
+# from blog.auth import create_user_command
 
 
-# The register view should render successfully on GET.
-# On POST with valid form data, it should redirect to the login URL
-# and the user’s data should be in the database.
-def test_register(client, app):
-    assert client.get('/auth/register').status_code == 200
-    response = client.post(
-        '/auth/register', data={'username': 'a', 'password': 'a'}
-    )
-    assert response.headers["Location"] == "/auth/login"
+# The create-user command should call create_user iff it has valid params.
+# Invalid data should display error messages.
+@pytest.mark.parametrize(('username', 'password', 'message', 'called'), (
+    ('testuser', 'testpass', 'Successfully registered', True),
+    ('', '', 'Username is required.', False),
+    ('a', '', 'Password is required.', False),
+    ('test', 'test', 'already registered', True),
+))
+def test_create_user(runner, monkeypatch, app,
+                     username, password, message, called):
+    class Recorder(object):
+        called = False
+
+    def fake_create_user(db, username, password):
+        Recorder.called = True
+        if username == 'test':
+            raise db.IntegrityError('This user already exists')
+
+    monkeypatch.setattr('blog.auth.create_user', fake_create_user)
 
     with app.app_context():
-        assert get_db().execute(
-            "SELECT * FROM user WHERE username = 'a'",
-        ).fetchone() is not None
+        result = runner.invoke(
+            args=['create-user', username, password]
+            )
 
-
-# Invalid data should display error messages.
-@pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('', '', b'Username is required.'),
-    ('a', '', b'Password is required.'),
-    ('test', 'test', b'already registered'),
-))
-def test_register_validate_input(client, username, password, message):
-    response = client.post(
-        '/auth/register',
-        data={'username': username, 'password': password}
-    )
-    assert message in response.data
+    assert message in result.output
+    assert called is Recorder.called
 
 
 # The tests for the login view are very similar to those for register.

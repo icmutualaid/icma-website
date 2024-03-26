@@ -9,6 +9,7 @@ def create_app(test_config=None):
 
     _init_instance(app)
     _init_db(app)
+    _init_auth(app)
 
     _init_route(app)
 
@@ -41,6 +42,12 @@ def _init_config(app, test_config):
 def _init_db(app):
     from . import db
     db.init_app(app)
+
+
+# auth init involves registering the init-user command
+def _init_auth(app):
+    from . import auth
+    auth.init_app(app)
 
 
 # route the request
