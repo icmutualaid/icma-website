@@ -22,3 +22,6 @@
     {% endfor %}
     {% block content %}{% endblock %}
 </section>
+    <script src="https://kit.fontawesome.com/352d992447.js" crossorigin="anonymous"></script>
+            <li><a href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li><a href="{{ url_for('auth.login') }}">Log In&nbsp;<i class="fa-solid fa-right-to-bracket"></i></a></li>
