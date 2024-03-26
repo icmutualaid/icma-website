@@ -2,24 +2,49 @@
 <title>{% block title %}{% endblock %} - Iowa City Mutual Aid</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- font awesome kit for icons -->
+<script src="https://kit.fontawesome.com/7bf45a980e.js" crossorigin="anonymous"></script>
+
+<!-- navbar -->
 <nav>
     <!-- replace header w logo, links to home -->
     <a class="logo" href="">
         <img src="{{ url_for('static', filename='logo.svg') }}">
     </a>
-    <ul>
-        <li><a href="">About</a></li>
-        <li><a href="">Projects</a></li>
-        <li><a href="">Resources</a></li>
-        <li><a href="">Newsletter</a></li>
-        {% if g.user %}
-        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-        <li><span>{{ g.user['username'] }}</span></li>
-        {% else %}
-        <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-        {% endif %}
-    </ul>
+    <div class="topnav" id="topnav">
+        <ul>
+            <li><a href="">About</a></li>
+            <li><a href="">Projects</a></li>
+            <li><a href="">Resources</a></li>
+            <li><a href="">Newsletter</a></li>
+            {% if g.user %}
+            <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+            <li><span>{{ g.user['username'] }}</span></li>
+            {% else %}
+            <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+            {% endif %}
+        </ul>
+        <!-- hamburger icon for small screens -->
+        <a href="javascript:void(0);" class="icon" onclick="collapseMenu()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
 </nav>
+
+<!-- js for the hamburger menu -->
+<script>
+    function collapseMenu() {
+      var x = document.getElementById("topnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+</script>
+
+<!-- page content -->
 <section class="content">
     <header>
         {% block header %}{% endblock %}
@@ -29,3 +54,23 @@
     {% endfor %}
     {% block content %}{% endblock %}
 </section>
+
+<!-- footer -->
+<div class="footer">
+    <a class="logo" href="">
+        <img src="{{ url_for('static', filename='logo.svg') }}">
+    </a>
+    <div class="contact">
+        <p class="location">Iowa City, Iowa</p>
+        <a href="https://www.instagram.com/icmutualaid/" target="blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <!-- i have fa v5 which does not have the x icon lol. we're prescriptivists -->
+        <a href="https://twitter.com/icmutualaid" target="blank">
+            <i class="fab fa-twitter-square"></i>
+        </a>
+        <a href="mailto:admin@icmutualaid.org">
+            <i class="far fa-envelope"></i>
+        </a>
+    </div>
+ </div>
