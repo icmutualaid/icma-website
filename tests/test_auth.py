@@ -1,34 +1,36 @@
 import pytest
 from flask import g, session
 
-from blog.auth import create_user_command
+# from blog.auth import create_user_command
 
 
-# The create-user command should call create_user function and echo a message.
-def test_create_user_command(runner, monkeypatch):
+# The create-user command should call create_user iff it has valid params.
+# Invalid data should display error messages.
+@pytest.mark.parametrize(('username', 'password', 'message', 'called'), (
+    ('testuser', 'testpass', 'Successfully registered', True),
+    ('', '', 'Username is required.', False),
+    ('a', '', 'Password is required.', False),
+    ('test', 'test', 'already registered', True),
+))
+def test_create_user(runner, monkeypatch, app,
+                     username, password, message, called):
     class Recorder(object):
         called = False
 
-    def fake_create_user():
+    def fake_create_user(db, username, password):
         Recorder.called = True
+        if username == 'test':
+            raise db.IntegrityError('This user already exists')
 
     monkeypatch.setattr('blog.auth.create_user', fake_create_user)
-    result = runner.invoke(
-        args=['create-user', 'testusername', 'testpassword']
-        )
-    assert 'Successfully registered' in result.output
-    assert Recorder.called
 
+    with app.app_context():
+        result = runner.invoke(
+            args=['create-user', username, password]
+            )
 
-# Invalid data should display error messages.
-@pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('', '', 'Username is required.'),
-    ('a', '', 'Password is required.'),
-    ('test', 'test', 'already registered'),
-))
-def test_validate_credentials(client, username, password, message):
-    validation_message = create_user_command(username, password)
-    assert message in validation_message
+    assert message in result.output
+    assert called is Recorder.called
 
 
 # The tests for the login view are very similar to those for register.

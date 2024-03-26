@@ -4,6 +4,7 @@ import click
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
+from flask.cli import with_appcontext
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from blog.db import get_db
@@ -119,6 +120,7 @@ def create_user(db, username, password):
 @click.command('create-user')
 @click.argument('username')
 @click.argument('password')
+@with_appcontext
 def create_user_command(username, password):
     error = validate_credentials(username, password)
 
