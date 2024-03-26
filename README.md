@@ -1,8 +1,8 @@
-![linter](https://github.com/icmutualaid/icma-website/actions/workflows/python-app.yml/badge.svg)
-
-This project will hold the code for our collective's website.
+This is the source code for our collective's website.
 
 # Status
+
+Automated tests: ![linter](https://github.com/icmutualaid/icma-website/actions/workflows/python-app.yml/badge.svg)
 
 The site is not yet ready for the public. We expect to go live sometime in April 2024.
 
@@ -24,45 +24,19 @@ Follow [GitHub flow](https://docs.github.com/en/get-started/using-github/github-
 
 If you are not an ICMA member and you're curious, [contact us](https://github.com/icmutualaid).
 
-# Installation and Operation
+To manually run tests: `coverage run -m pytest`
+
+# Technical
+
+Also see [our project wiki](https://github.com/icmutualaid/icma-website/wiki/) for more information.
+
+## Installation
 
 1. download the project: `git clone https://github.com/icmutualaid/icma-website.git`
 2. create a python venv (in vscode, `Python > Create Environment…`) and install dependencies (vscode will do this automatically; otherwise, `pip install -e .`)
 3. initialize the db: `flask --app blog init-db`
 4. add an admin user: `flask --app blog create-user myusername mypassword`
 5. start the webserver in debug mode: `flask --app blog run --debug`
-
-To manually run tests: `coverage run -m pytest`
-
-# Technical Specifications
-
-## Features
-
-The project should support these basic groups of stories:
-
-1. As a server admin, I need to manage website admin accounts.
-2. As a website admin, I need to create and manage blog posts on the website.
-3. As a member of the public, I need to create and manage a wiki account.
-4. As a wiki user, I need to do wiki stuff.
-5. As a website admin, I need to do wiki admin stuff.
-6. As a member of the public, I need to see contact info and social accounts.
-
-## File Structure
-
-Here is an outline of the file structure you'll see while working on the project:
-
-```
-icma-website/
-  blog/             source code for the app
-    static/         static files, like CSS
-    templates/      HTML templates
-  instance/         contains the website's db (git ignored)
-  .gitignore        instructs your git client to ignore certain files when committing
-```
-
-The `instance/` directory will appear when you run the project. This won't and shouldn't be added to your commits.
-
-Other junk like `.venv/`, `__pycache__/`, and `.git/` will also appear as you work on the project. They won't and shouldn't be added to your commits.
 
 # The Project and Our Principles
 
