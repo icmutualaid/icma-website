@@ -75,18 +75,28 @@ sqlite3.register_adapter(datetime.datetime, adapt_datetime_epoch)
 
 
 def convert_date(val):
-    """Convert ISO 8601 date to datetime.date object."""
-    return datetime.date.fromisoformat(val.decode())
+    """Convert sqlite date bytestring to datetime.date object."""
+    return convert_datetime(val).date()
 
 
 def convert_datetime(val):
-    """Convert ISO 8601 datetime to datetime.datetime object."""
-    return datetime.datetime.fromisoformat(val.decode())
+    """Convert sqlite datetime bytestring to datetime.datetime object."""
+    return sql_time_bytes_to_datetime(val)
 
 
 def convert_timestamp(val):
     """Convert Unix epoch timestamp to datetime.datetime object."""
-    return datetime.datetime.fromtimestamp(int(val))
+    # It seems that we actually get a datetime bytestring back from the db.
+    # So we should make sure we handle that case.
+    if (type(val) is int):
+        return datetime.datetime.fromtimestamp(int(val))
+    if (type(val) is bytes):
+        return convert_datetime(val)
+
+
+# Convert an epoch time into a datetime
+def sql_time_bytes_to_datetime(t):
+    return datetime.datetime.strptime(t.decode(), '%Y-%m-%d %H:%M:%S')
 
 
 sqlite3.register_converter("date", convert_date)
