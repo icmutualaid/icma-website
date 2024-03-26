@@ -13,31 +13,6 @@ from blog.db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-# # associate the url /register with the register view function
-# @bp.route('/register', methods=('GET', 'POST'))
-# def register():
-#     if request.method == 'POST':
-#         # request.form is a dict that maps submitted form keys and values
-#         username = request.form['username']
-#         password = request.form['password']
-
-#         error = validate_credentials(username, password)
-
-#         # insert a user with these credentials
-#         if error is None:
-#             db = get_db()
-#             try:
-#                 create_user(db, username, password)
-#             except db.IntegrityError:
-#                 error = f'User {username} is already registered.'
-#             else:
-#                 return redirect(url_for('auth.login'))
-
-#         flash(error)
-
-#     return render_template('auth/register.html')
-
-
 # associate the url /login with the login view function
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
