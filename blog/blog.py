@@ -111,7 +111,7 @@ def update(id):
 
     if request.method == 'POST':
         title = request.form['title']
-        body = request.form['body']
+        body = request.form.get('body')
         error = None
 
         if not title:
