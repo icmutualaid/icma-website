@@ -10,10 +10,7 @@ We do this because the conditions in which we are made to live are unjust. Our l
 
 We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
 
-You may contact us via email (see our profile [@icmutualaid](https://github.com/icmutualaid)) or on our social media platforms:
-
-- Instagram: [@icmutualaid](https://www.instagram.com/icmutualaid)
-- Twitter: [@icmutualaid](https://twitter.com/icmutualaid)
+Check our profile [@icmutualaid](https://github.com/icmutualaid) if you want to get in contact.
 
 # About Our Project
 
