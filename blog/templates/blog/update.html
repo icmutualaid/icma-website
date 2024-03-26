@@ -11,7 +11,9 @@
     value="{{ request.form['title'] or post['title'] }}" required>
     <label for="body">Body</label>
     <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
-    <input type="submit" value="Save">
+    <div class="two-buttons">
+        <input type="submit" value="Save">
+    </div>
 </form>
 <hr>
 <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">

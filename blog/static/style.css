@@ -1,8 +1,9 @@
 @import "./colors.css"; /* defines our color palette in it's own doc */
 
 html {
-    font-family: sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: white;
+    color: var(--black);
 }
 
 body {
@@ -12,8 +13,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: serif;
-    color: var(--dark);
     margin: 1rem 0;
 }
 
@@ -22,7 +21,8 @@ a {
 }
 
 a:hover, a:focus {
-    opacity: 80%;
+    color: var(--medium-gray);
+    text-decoration: none;
 }
 
 .contact {
@@ -49,39 +49,50 @@ a:hover, a:focus {
 
 hr {
     border: none;
-    border-top: 2px solid lightgray;
+    border-top: 2px solid var(--gray);
 }
 
 .logo {
+    display: flex;
+    text-wrap: nowrap;
+    text-decoration: none;
     min-width: 150px;
     width: 150px;
     max-width: 150px;
     padding-inline: 1rem;
+
+    h2 {
+        padding-inline: 2rem;
+    }
 }
 
-.logo:hover {
+.logo:hover, .logo:focus {
     opacity: 80%;
 }
 
 /* dark full-width na & footer */
-nav, .footer {
-    background: var(--dark); 
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: top;
-    justify-content: space-between;
-    padding: 1.5rem;
-    color: white;
-}
-
-.footer {
-    background: var(--dark); 
+nav {
+    background: var(--black); 
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem;
     color: white;
+}
+
+.footer {
+    background: var(--black); 
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    color: white;
+
+    h2 {
+        padding-inline: 1rem;
+    }
 }
 
 nav ul, .footer ul  {
@@ -96,9 +107,34 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
     padding: 1rem;
 }
 
+.column {
+    float: left;
+    display: flex;
+}
+
+.left {
+width:25%;
+}
+
+.right {
+width: 75%;
+}
+
+.action {
+    color: var(--black);
+    font-size: 2rem;
+}
+
+.action.edit {
+    padding-right: 0.5rem;
+}
+
+.action:hover, .action:focus {
+    color: gray;
+}
+
 .topnav {
     display: flex;
-    align-items: center;
     overflow: hidden;
 }
 
@@ -106,8 +142,19 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
     display: none;
     padding: 1rem;
   }
+
+@media screen and (max-width: 1475px) {
+    nav, .footer {
+        h2 {
+            display: none;
+        }
+    }
+}
   
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
+    nav {
+        align-items: start;
+    }
     .topnav ul li a {
         display: none;
     }
@@ -117,7 +164,7 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
     .topnav.responsive {
         position: relative;
         padding-top: 3rem;
@@ -142,11 +189,13 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
 }
 
 .content {
-    padding: 0 1rem 1rem;
+    width: 90%;
+    margin: auto;
+    padding-block: 5rem;
 }
 
 .content > header {
-    border-bottom: 1px solid white;
+    border-bottom: 2px solid var(--gray);
     display: flex;
     align-items: flex-end;
 }
@@ -179,8 +228,9 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
 }
 
 .post .about {
-    color: slategray;
+    color: var(--darker-gray);
     font-style: italic;
+    width: 100%
 }
 
 .post .body {
@@ -203,7 +253,9 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
 }
 
 .content input, .content textarea {
+    padding: 1rem;
     margin-bottom: 1em;
+    font-size: 1.5rem;
 }
 
 .content textarea {
@@ -211,11 +263,48 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
     resize: vertical;
 }
 
-input.danger {
-    color: #cc2f2e;
+.two-buttons {
+    display: block;
 }
 
 input[type=submit] {
+    margin-block: 0.5rem;
     align-self: start;
-    min-width: 10em;
+    font-size: 25px;
+    text-align: left;
+    color: var(--black);
+    background-color: var(--green);
+    border: none;
+    border-radius: 4px;
+    margin-right: 1rem;
+}
+
+input[type=button] {
+    margin-block: 0.5rem;
+    align-self: start;
+    font-size: 25px;
+    text-align: left;
+    color: var(--black);
+    background-color: var(--medium-gray);
+    border: none;
+    border-radius: 4px;
+}
+
+input[type=submit]:hover, input[type=submit]:focus {
+    background-color: var(--dark-green);
+    cursor: pointer;
+}
+
+input[type=button]:hover, input[type=button]:focus {
+    background-color: var(--dark-gray);
+    cursor: pointer;
+}
+
+input.danger {
+    background-color: var(--red);
+    color: white;
+}
+
+input.danger:hover, input.danger:focus {
+    background-color: var(--dark-red);
 }

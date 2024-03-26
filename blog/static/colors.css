@@ -1,4 +1,11 @@
 :root {
-    --dark: #1d1d1d;
-    --purple: #C09EFF; /* contrast ratio on --dark: 7.68:1. WCAG AAA compliant */
+    --gray: #e1e1e1;
+    --medium-gray: #c9c9c9;
+    --dark-gray: #adadad;
+    --darker-gray: #707070;
+    --black: #1d1d1d;
+    --red: #cc2f2e;
+    --dark-red: #b12424;
+    --green: #2ecc53;
+    --dark-green: #24b15c;
 }
