@@ -3,8 +3,29 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
+import flask_ckeditor
+
 from blog.auth import login_required
 from blog.db import get_db
+
+
+# Polyfill for flask_ckeditor.utils.cleanify
+# Stolen from https://github.com/helloflask/flask-ckeditor/
+# Can be replaced with an import when flask_ckeditor==0.5.2 is released:
+# from flask_ckeditor.utils import cleanify
+# Then we can also remove the bleach dependency.
+def cleanify(text, *, allow_tags=None):
+    import bleach
+    """Clean the input from client, this function rely on bleach.
+
+    :parm text: input str
+    :parm allow_tags: if you don't want to use default `allow_tags`,
+        you can provide a Iterable which include html tag string like ['a', 'li',...].
+    """
+    default_allowed_tags = {'a', 'abbr', 'b', 'blockquote', 'code',
+                            'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+                            'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'}
+    return bleach.clean(text, tags=allow_tags or default_allowed_tags)
 
 
 bp = Blueprint('blog', __name__)
@@ -26,7 +47,21 @@ def index():
 def create():
     if request.method == 'POST':
         title = request.form['title']
-        body = request.form['body']
+        body = cleanify(
+                        request.form.get('body'),
+                        allow_tags={
+                            'p',
+                            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+                            'a',
+                            'abbr',
+                            'blockquote',
+                            'b', 'strong', 'i', 'em', 'u',
+                            'pre', 'code',
+                            'ul', 'ol', 'li',
+                            'table', 'tr', 'tbody', 'td', 'thead', 'th',
+                            'img',
+                            },
+                        )
         error = None
 
         if not title:

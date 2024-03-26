@@ -3,13 +3,15 @@ import sqlite3
 
 import click
 # g is a special object that is unique for each request
-# it is used to store data that might be accessed by multiple functions during the request
+# it stores request data that we might want to access
+# in multiple places for the same request
 from flask import current_app, g
 
 
 # creates and returns the db connection
 def get_db():
-    # cache the db connection as g.db in case we call get_db multiple times for the same request
+    # cache the db connection as g.db
+    # in case we call get_db multiple times for the same request
     if 'db' not in g:
         g.db = sqlite3.connect(
             current_app.config['DATABASE'],
