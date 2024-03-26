@@ -1,27 +1,31 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Iowa City Mutual Aid</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<nav>
-    <h1>Iowa City Mutual Aid</h1>
-    <ul>
-        {% if g.user %}
-        <li><span>{{ g.user['username'] }}</span></li>
-        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-        {% else %}
-        <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-        {% endif %}
-    </ul>
-</nav>
-<section class="content">
-    <header>
-        {% block header %}{% endblock %}
-    </header>
-    {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-    {% endfor %}
-    {% block content %}{% endblock %}
-</section>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %} - Iowa City Mutual Aid</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="https://kit.fontawesome.com/352d992447.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav>
+        <h1>Iowa City Mutual Aid</h1>
+        <ul>
+            {% if g.user %}
+            <li><span>{{ g.user['username'] }}</span></li>
             <li><a href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
+            {% else %}
             <li><a href="{{ url_for('auth.login') }}">Log In&nbsp;<i class="fa-solid fa-right-to-bracket"></i></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section class="content">
+        <header>
+            {% block header %}{% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+</body>
+</html>
