@@ -74,6 +74,16 @@ nav, .footer {
     color: white;
 }
 
+.footer {
+    background: var(--dark); 
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    color: white;
+}
+
 nav ul, .footer ul  {
     display: flex;
     list-style: none;
@@ -87,6 +97,8 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
 }
 
 .topnav {
+    display: flex;
+    align-items: center;
     overflow: hidden;
 }
 
