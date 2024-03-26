@@ -1,26 +1,12 @@
 ![linter](https://github.com/icmutualaid/icma-website/actions/workflows/python-app.yml/badge.svg)
 
-# About Our Organization
-
-We are IC Mutual Aid. 
-
-We work to meet the survival needs of people whom our systems continue to fail.
-
-We do this because the conditions in which we are made to live are unjust. Our local, state, and national governments all continue to neglect crises and leave people behind.
-
-We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
-
-Check our profile [@icmutualaid](https://github.com/icmutualaid) if you want to get in contact.
-
-# About Our Project
-
 This project will hold the code for our collective's website.
 
-## Status
+# Status
 
 The site is not yet ready for the public. We expect to go live sometime in April 2024.
 
-## Roadmap
+# Roadmap
 
 We've stolen some basic blogging features from [the Flask tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/).
 
@@ -30,15 +16,15 @@ We need to customize the website's appearance, audit it for accessibility, deplo
 
 Then, we'll decide on wiki software and implement it. We'll either include that software in this project or host it separately and include a link.
 
-## Contributing
+# Contribution and Workflow
 
-If you are an ICMA member, ask someone on the IT committee to add your GitHub account as a contributor on the project, or if you have the [@icmutualaid](https://github.com/icmutualaid) GitHub credentials, do it yourself on [this project's Settings page](https://github.com/icmutualaid/icma-website/settings/).
+If you are an ICMA member, ask someone on the IT committee to add your GitHub account as an owner of the organization, or if you have the [@icma-admin](https://github.com/icma-admin) GitHub credentials, do it yourself on [the organization's Members page](https://github.com/orgs/icmutualaid/people).
 
-Please make your git commits using your own GitHub account, **not** the [@icmutualaid](https://github.com/icmutualaid) account.
+Follow [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) (create pull requests with individual fixes and features). Make your git commits using your own GitHub account, **not** the [@icma-admin](https://github.com/icma-admin) account.
 
-If you are not an ICMA member, how did you find this page? Contact us if you're curious!
+If you are not an ICMA member and you're curious, [contact us](https://github.com/icmutualaid).
 
-### Installation
+# Installation and Operation
 
 1. download the project: `git clone https://github.com/icmutualaid/icma-website.git`
 2. create a python venv (in vscode, `Python > Create Environment…`) and install dependencies (vscode will do this automatically; otherwise, `pip install -e .`)
@@ -48,9 +34,9 @@ If you are not an ICMA member, how did you find this page? Contact us if you're 
 
 To manually run tests: `coverage run -m pytest`
 
-## Technical Specifications
+# Technical Specifications
 
-### Features
+## Features
 
 The project should support these basic groups of stories:
 
@@ -61,7 +47,7 @@ The project should support these basic groups of stories:
 5. As a website admin, I need to do wiki admin stuff.
 6. As a member of the public, I need to see contact info and social accounts.
 
-### File Structure
+## File Structure
 
 Here is an outline of the file structure you'll see while working on the project:
 
@@ -78,15 +64,15 @@ The `instance/` directory will appear when you run the project. This won't and s
 
 Other junk like `.venv/`, `__pycache__/`, and `.git/` will also appear as you work on the project. They won't and shouldn't be added to your commits.
 
-## Mission
+# The Project and Our Principles
 
-### We are resourceful.
+## We are resourceful.
 
 The purpose of this project is to eliminate overhead costs. Every dollar spent on a website builder is one less dollar spent on propane.
 
 We will choose wisely which services to take on ourselves, because this is all for nothing if the collective has to hire a developer to rescue our project.
 
-### We cannot be beheaded.
+## We cannot be beheaded.
 
 The project can never rest on one or two people's shoulders. Other members and other collectives must be able to continue our work. We must:
 
@@ -97,10 +83,24 @@ The project can never rest on one or two people's shoulders. Other members and o
 - Keep an archive with regular backups.
 - Keep the project free, open source, and discoverable.
 
-### We leave no one behind.
+## We leave no one behind.
 
 Inaccessible is never "good enough for now." Our site will always be easy to parse with accessibility and translation software.
 
-### We share our skills.
+## We share our skills.
 
 To that end, we will collaborate on development and operations.
+
+# About Our Organization
+
+We are the Iowa City Mutual Aid collective.
+
+Check our profile [@icmutualaid](https://github.com/icmutualaid) if you want to get in contact.
+
+## Our Mission
+
+We work to meet the survival needs of people whom our systems continue to fail.
+
+We do this because the conditions in which we are made to live are unjust. Our local, state, and national governments all continue to neglect crises and leave people behind.
+
+We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
