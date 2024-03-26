@@ -8,6 +8,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+    types: [opened, reopened, review_requested]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -57,3 +58,6 @@ jobs:
     - name: Test with pytest and coverage
       run: |
         coverage run -m pytest
+  rebuild:
+    if: contains(github.event.comment.body, 'actions plz')
+    uses: ./.github/workflows/python-app.yml
