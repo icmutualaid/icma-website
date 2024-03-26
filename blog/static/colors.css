@@ -1,0 +1,4 @@
+:root {
+    --dark: #1d1d1d;
+    --purple: #C09EFF; /* contrast ratio on --dark: 7.68:1. WCAG AAA compliant */
+}

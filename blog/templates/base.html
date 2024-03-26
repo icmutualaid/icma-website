@@ -3,11 +3,18 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <nav>
-    <h1>Iowa City Mutual Aid</h1>
+    <!-- replace header w logo, links to home -->
+    <a class="logo" href="">
+        <img src="{{ url_for('static', filename='logo.svg') }}">
+    </a>
     <ul>
+        <li><a href="">About</a></li>
+        <li><a href="">Projects</a></li>
+        <li><a href="">Resources</a></li>
+        <li><a href="">Newsletter</a></li>
         {% if g.user %}
-        <li><span>{{ g.user['username'] }}</span></li>
         <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+        <li><span>{{ g.user['username'] }}</span></li>
         {% else %}
         <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
         {% endif %}

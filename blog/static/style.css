@@ -1,45 +1,52 @@
+@import "./colors.css"; /* defines our color palette in it's own doc */
+
 html {
     font-family: sans-serif;
-    background: #eee;
-    padding: 1rem;
+    background: white;
 }
 
 body {
-    max-width: 960px;
-    margin: 0 auto;
-    background: white;
+    /* remove max-width for body, we'll put the content in a div and adjust that */
+    margin: 0;
+    font-size: 1.5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: serif;
-    color: #377ba8;
+    color: var(--dark);
     margin: 1rem 0;
 }
 
 a {
-    color: #377ba8;
+    color: lightgray;
+}
+
+a:hover, a:focus {
+    opacity: 80%;
 }
 
 hr {
     border: none;
-    border-top: 1px solid lightgray;
+    border-top: 2px solid lightgray;
 }
 
+.logo {
+    min-width: 7%; /* i know it's either 6 or 8 and 7 isn't real but this is the best size */
+    padding-inline: 1rem;
+}
+
+.logo:hover {
+    opacity: 80%;
+}
+
+/* dark full-width nav */
 nav {
-    background: lightgray;
+    background: var(--dark); 
     display: flex;
     align-items: center;
-    padding: 0 0.5rem;
-}
-
-nav h1 {
-    flex: auto;
-    margin: 0;
-}
-
-nav h1 a {
-    text-decoration: none;
-    padding: 0.25rem 0.5rem;
+    justify-content: space-between;
+    padding: 1.5rem;
+    color: lightgray;
 }
 
 nav ul  {
@@ -51,7 +58,7 @@ nav ul  {
 
 nav ul li a, nav ul li span, header .action {
     display: block;
-    padding: 0.5rem;
+    padding: 1rem;
 }
 
 .content {
