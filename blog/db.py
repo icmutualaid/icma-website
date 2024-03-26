@@ -1,3 +1,4 @@
+import datetime
 import sqlite3
 
 import click
@@ -49,3 +50,55 @@ def init_app(app):
 def init_db_command():
     init_db()
     click.echo('Initialized the database.')
+
+
+# Add some recipes for adapters and converters.
+# The default sqlite3 timestamp converter is deprecated.
+def adapt_date_iso(val):
+    """Adapt datetime.date to ISO 8601 date."""
+    return val.isoformat()
+
+
+def adapt_datetime_iso(val):
+    """Adapt datetime.datetime to timezone-naive ISO 8601 date."""
+    return val.isoformat()
+
+
+def adapt_datetime_epoch(val):
+    """Adapt datetime.datetime to Unix timestamp."""
+    return int(val.timestamp())
+
+
+sqlite3.register_adapter(datetime.date, adapt_date_iso)
+sqlite3.register_adapter(datetime.datetime, adapt_datetime_iso)
+sqlite3.register_adapter(datetime.datetime, adapt_datetime_epoch)
+
+
+def convert_date(val):
+    """Convert sqlite date bytestring to datetime.date object."""
+    return convert_datetime(val).date()
+
+
+def convert_datetime(val):
+    """Convert sqlite datetime bytestring to datetime.datetime object."""
+    return sql_time_bytes_to_datetime(val)
+
+
+def convert_timestamp(val):
+    """Convert Unix epoch timestamp to datetime.datetime object."""
+    # It seems that we actually get a datetime bytestring back from the db.
+    # So we should make sure we handle that case.
+    if (type(val) is int):
+        return datetime.datetime.fromtimestamp(int(val))
+    if (type(val) is bytes):
+        return convert_datetime(val)
+
+
+# Convert an epoch time into a datetime
+def sql_time_bytes_to_datetime(t):
+    return datetime.datetime.strptime(t.decode(), '%Y-%m-%d %H:%M:%S')
+
+
+sqlite3.register_converter("date", convert_date)
+sqlite3.register_converter("datetime", convert_datetime)
+sqlite3.register_converter("timestamp", convert_timestamp)
