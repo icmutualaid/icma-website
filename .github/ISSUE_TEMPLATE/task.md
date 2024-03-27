@@ -9,9 +9,9 @@ assignees: ''
 
 Suggested steps:
 
-- [ ] 1. Do the thing
-- [ ] 2. Test the thing
-- [ ] 3. Document the thing
+- [ ] Do the thing
+- [ ] Test the thing
+- [ ] Document the thing
 
 Acceptance criteria:
 - [ ] The thing works
