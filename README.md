@@ -38,6 +38,20 @@ Also see [our project wiki](https://github.com/icmutualaid/icma-website/wiki/) f
 4. add an admin user: `flask --app blog create-user myusername mypassword`
 5. start the webserver in debug mode: `flask --app blog run --debug`
 
+# About Our Organization
+
+We are the Iowa City Mutual Aid collective.
+
+Check our profile [@icmutualaid](https://github.com/icmutualaid) if you want to get in contact.
+
+## Our Mission
+
+We work to meet the survival needs of people whom our systems continue to fail.
+
+We do this because the conditions in which we are made to live are unjust. Our local, state, and national governments all continue to neglect crises and leave people behind.
+
+We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
+
 # The Project and Our Principles
 
 ## We are resourceful.
@@ -59,22 +73,8 @@ The project can never rest on one or two people's shoulders. Other members and o
 
 ## We leave no one behind.
 
-Inaccessible is never "good enough for now." Our site will always be easy to parse with accessibility and translation software.
+Inaccessible is never "good enough for now." Our site will always be easy to parse with accessibility and translation software. Our specific goal is for the production site to always be fully WCAG 2.1 AA compliant.
 
 ## We share our skills.
 
 To that end, we will collaborate on development and operations.
-
-# About Our Organization
-
-We are the Iowa City Mutual Aid collective.
-
-Check our profile [@icmutualaid](https://github.com/icmutualaid) if you want to get in contact.
-
-## Our Mission
-
-We work to meet the survival needs of people whom our systems continue to fail.
-
-We do this because the conditions in which we are made to live are unjust. Our local, state, and national governments all continue to neglect crises and leave people behind.
-
-We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
