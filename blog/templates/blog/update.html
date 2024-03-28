@@ -11,7 +11,9 @@
     value="{{ request.form['title'] or post['title'] }}" required>
     <label for="body">Body</label>
     {{ ckeditor.create(name='body', value=post.body) }}
-    <input type="submit" value="Save">
+    <div class="two-buttons">
+        <input type="submit" value="Save">
+    </div>
 </form>
 {{ ckeditor.load() }}
 {{ ckeditor.config(name='body') }}

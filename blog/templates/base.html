@@ -4,20 +4,47 @@
     <title>{% block title %}{% endblock %} - Iowa City Mutual Aid</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/352d992447.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- js for the hamburger menu -->
+    <script>
+        function collapseMenu() {
+            var x = document.getElementById("topnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
     <nav>
-        <h1>Iowa City Mutual Aid</h1>
-        <ul>
-            {% if g.user %}
-            <li><span>{{ g.user['username'] }}</span></li>
-            <li><a href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
-            {% else %}
-            <li><a href="{{ url_for('auth.login') }}">Log In&nbsp;<i class="fa-solid fa-right-to-bracket"></i></a></li>
-            {% endif %}
-        </ul>
+        <!-- logo next to header, links to home -->
+        <a class="logo" href="" aria-label="Home">
+            <img src="{{ url_for('static', filename='logo.svg') }}" alt="Iowa City Mutual Aid Logo">
+            <h1 class="logo-header">Iowa City Mutual Aid</h1>  
+        </a> 
+        <div class="topnav" id="topnav">
+            <ul>
+                <li><a href="">About</a></li>
+                <li><a href="">Projects</a></li>
+                <li><a href="">Resources</a></li>
+                <li><a href="">Newsletter</a></li>
+                {% if g.user %}
+                <li><span>{{ g.user['username'] }}</span></li>
+                <li><a href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.login') }}">Log In&nbsp;<i class="fa-solid fa-right-to-bracket"></i></a></li>
+                {% endif %}
+            </ul>
+            <!-- hamburger icon for small screens -->
+            <a href="javascript:void(0);" class="icon" onclick="collapseMenu()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
     </nav>
+    <!-- page content -->
     <section class="content">
         <header>
             {% block header %}{% endblock %}
@@ -27,5 +54,6 @@
         {% endfor %}
         {% block content %}{% endblock %}
     </section>
+    {% include 'footer.html' %}
 </body>
 </html>
