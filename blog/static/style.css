@@ -1,79 +1,228 @@
+@import "./colors.css"; /* defines our color palette in it's own doc */
+
 html {
-    font-family: sans-serif;
-    background: #eee;
-    padding: 1rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--main-bg);
+    color: var(--text-color);
 }
 
 body {
-    max-width: 960px;
-    margin: 0 auto;
-    background: white;
+    /* remove max-width for body, we'll put the content in a div and adjust that */
+    margin: 0;
+    font-size: 1.25rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: serif;
-    color: #377ba8;
     margin: 1rem 0;
 }
 
 a {
-    color: #2b5f82;
+    color: var(--link-color);
+}
+
+a:hover, a:focus {
+    color: var(--link-hover);
+    text-decoration: none;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+    .contact {
+        display: block;
+        text-align: right;
+    }
+}
+
+.contact a {
+    font-size: 3rem;
+    text-decoration: none;
+}
+
+.contact a, .contact p {
+    padding: 1rem;
+    margin: 0;
 }
 
 hr {
     border: none;
-    border-top: 1px solid lightgray;
+    border-top: 2px solid var(--border-color);
 }
 
-nav {
-    background: lightgray;
+.logo {
     display: flex;
-    align-items: center;
-    padding: 0 0.5rem;
-}
-
-nav h1 {
-    flex: auto;
-    margin: 0;
-}
-
-nav h1 a {
+    text-wrap: nowrap;
     text-decoration: none;
-    padding: 0.25rem 0.5rem;
+    min-width: 125px;
+    width: 125px;
+    max-width: 125px;
+    padding-inline: 1rem;
+
+    .logo-header {
+        font-size: 1.5rem;
+        padding-inline: 2rem;
+    }
 }
 
-nav ul  {
+.logo:hover, .logo:focus {
+    opacity: 80%;
+}
+
+.access-logo {
+    padding-inline: 1rem;
+}
+
+/* dark full-width na & footer */
+nav {
+    background: var(--dark-bg); 
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    color: var(--logo-header);
+}
+
+.footer {
+    background: var(--dark-bg); 
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    color: var(--logo-header);
+}
+
+nav ul, .footer ul  {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-nav ul li a, nav ul li span, header .action {
+nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action {
     display: block;
-    padding: 0.5rem;
+    padding: 1rem;
+}
+
+.column {
+    float: left;
+    display: flex;
+}
+
+.left {
+width:25%;
+}
+
+.right {
+width: 75%;
+}
+
+.action {
+    color: var(--text-color);
+    font-size: 2rem;
+}
+
+.action.edit {
+    padding-right: 0.5rem;
+}
+
+.action:hover, .action:focus {
+    color: var(--action-hover);
+}
+
+.topnav {
+    display: flex;
+    overflow: hidden;
+}
+
+.topnav .icon {
+    display: none;
+    padding: 1rem;
+  }
+
+@media screen and (max-width: 1475px) {
+    .logo-header {
+        display: none;
+    }
+}
+  
+@media screen and (max-width: 1050px) {
+    nav {
+        align-items: start;
+    }
+    .topnav ul li a, .topnav ul li span {
+        display: none;
+    }
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .topnav.responsive {
+        position: relative;
+        padding-top: 3rem;
+    }
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive ul {
+        display: block;
+    }
+    .topnav.responsive ul li a, .topnav.responsive ul li span {
+        float: none;
+        display: block;
+        text-align: right;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .footer {
+        flex-direction: column;
+        padding-bottom: 2.5rem;
+    }
+
+    .location {
+        text-align: center;
+    }
+
+    .contact {
+        padding-bottom: 1.5rem;
+    }
+}
+
+.location {
+    padding-inline: 1rem;
 }
 
 .content {
-    padding: 0 1rem 1rem;
+    width: 90%;
+    margin: auto;
+    padding-block: 3rem;
 }
 
 .content > header {
-    border-bottom: 1px solid lightgray;
+    border-bottom: 2px solid var(--border-color);
     display: flex;
     align-items: flex-end;
 }
 
 .content > header h1 {
     flex: auto;
-    margin: 1rem 0 0.25rem 0;
 }
 
 .flash {
     margin: 1em 0;
     padding: 1em;
-    background: #cae6f6;
-    border: 1px solid #377ba8;
+    background: var(--main-bg);
+    border: 1px solid #377ba8; /* update this sometime */
 }
 
 .post > header {
@@ -92,8 +241,9 @@ nav ul li a, nav ul li span, header .action {
 }
 
 .post .about {
-    color: #657382;
+    color: var(--about-text);
     font-style: italic;
+    width: 100%
 }
 
 .post .body {
@@ -116,7 +266,9 @@ nav ul li a, nav ul li span, header .action {
 }
 
 .content input, .content textarea {
+    padding: 1rem;
     margin-bottom: 1em;
+    font-size: 1.5rem;
 }
 
 .content textarea {
@@ -124,11 +276,48 @@ nav ul li a, nav ul li span, header .action {
     resize: vertical;
 }
 
-input.danger {
-    color: #cc2f2e;
+.two-buttons {
+    display: block;
 }
 
 input[type=submit] {
+    margin-block: 0.5rem;
     align-self: start;
-    min-width: 10em;
+    font-size: 25px;
+    text-align: left;
+    color: var(--black);
+    background-color: var(--submit-btn);
+    border: none;
+    border-radius: 4px;
+    margin-right: 1rem;
+}
+
+input[type=button] {
+    margin-block: 0.5rem;
+    align-self: start;
+    font-size: 25px;
+    text-align: left;
+    color: var(--black);
+    background-color: var(--cancel-btn);
+    border: none;
+    border-radius: 4px;
+}
+
+input[type=submit]:hover, input[type=submit]:focus {
+    background-color: var(--submit-btn-hover);
+    cursor: pointer;
+}
+
+input[type=button]:hover, input[type=button]:focus {
+    background-color: var(--cancel-btn-hover);
+    cursor: pointer;
+}
+
+input.danger {
+    background-color: var(--delete-btn);
+    color: white;
+}
+
+input.danger:hover, input.danger:focus {
+    background-color: var(--delete-btn-hover);
 }

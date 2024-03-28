@@ -32,11 +32,7 @@ Also see [our project wiki](https://github.com/icmutualaid/icma-website/wiki/) f
 
 ## Installation
 
-1. download the project: `git clone https://github.com/icmutualaid/icma-website.git`
-2. create a python venv (in vscode, `Python > Create Environment…`) and install dependencies (vscode will do this automatically; otherwise, `pip install -e .`)
-3. initialize the db: `flask --app blog init-db`
-4. add an admin user: `flask --app blog create-user myusername mypassword`
-5. start the webserver in debug mode: `flask --app blog run --debug`
+See [the Installation page on our project wiki](https://github.com/icmutualaid/icma-website/wiki/Installation) for detailed instructions.
 
 # About Our Organization
 
