@@ -1,4 +1,5 @@
 :root {
+/* ==== Color Palette ==== */
     --gray: #e1e1e1;
     --medium-gray: #c9c9c9;
     --dark-gray: #adadad;
@@ -8,4 +9,22 @@
     --dark-red: #b12424;
     --green: #2ecc53;
     --dark-green: #24b15c;
+
+/* ==== Project Color Definitions ==== */
+    --link-color: white;
+    --link-hover: var(--medium-gray);
+    --border-color: var(--gray);
+    --action-hover: var(--darker-gray);
+    --main-bg: white;
+    --dark-bg: var(--black);
+    --logo-header: white;
+    --header-text: var(--black);
+    --text-color: var(--black);
+    --about-text: var(--darker-gray);
+    --submit-btn: var(--green);
+    --submit-btn-hover: var(--dark-green);
+    --cancel-btn: var(--medium-gray);
+    --cancel-btn-hover: var(--dark-gray);
+    --delete-btn: var(--red);
+    --delete-btn-hover: var(--dark-red);
 }
