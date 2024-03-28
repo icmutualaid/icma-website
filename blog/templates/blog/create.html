@@ -11,8 +11,8 @@
     <label for="body">Body</label>
     {{ ckeditor.create(name='body') }}
     <div class="two-buttons">
-        <input type="submit" value="Save">
         <input type="button" value="Cancel" onclick="history.back()">
+        <input type="submit" value="Save">
     </div>
 </form>
 {{ ckeditor.load() }}
