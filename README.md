@@ -2,7 +2,9 @@ This is the source code for our collective's website.
 
 # Status
 
-Automated tests: ![linter](https://github.com/icmutualaid/icma-website/actions/workflows/python-app.yml/badge.svg)
+![linter](https://github.com/icmutualaid/icma-website/actions/workflows/python-app.yml/badge.svg)
+
+![linter](https://github.com/icmutualaid/icma-website/coverage.svg)
 
 The site is not yet ready for the public. We expect to go live sometime in April 2024.
 
