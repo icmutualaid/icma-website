@@ -58,11 +58,6 @@ def _init_auth(app):
 
 # route the request
 def _init_route(app):
-    # hello world page
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-
     # register the auth blueprint with a url prefix defined in auth.py
     from . import auth
     app.register_blueprint(auth.bp)
@@ -71,3 +66,7 @@ def _init_route(app):
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
+
+    # register the static content blueprint
+    from . import content
+    app.register_blueprint(content.bp)
