@@ -24,4 +24,4 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["blog"]
+source = ["blog", "tests"]
