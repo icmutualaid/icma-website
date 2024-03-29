@@ -3,7 +3,7 @@
 html {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--main-bg);
-    color: var(--text-color);
+    color: var(--text-color-dark);
 }
 
 body {
@@ -16,6 +16,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     margin: 1rem 0;
+    color: var(--header-text-dark)
 }
 
 a {
@@ -67,6 +68,7 @@ hr {
         font-size: 1.5rem;
         padding-inline: 1rem;
         margin: auto;
+        color: var(--header-text-light)
     }
 }
 
@@ -86,7 +88,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    color: var(--logo-header);
+    color: var(--text-color-light);
 }
 
 .footer {
@@ -96,8 +98,8 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    color: var(--logo-header);
     margin-top: auto;
+    color: var(--text-color-light);
 }
 
 .footer-content {
@@ -131,7 +133,7 @@ width: 75%;
 }
 
 .action {
-    color: var(--text-color);
+    color: var(--action);
     font-size: 1.25rem;
 }
 
@@ -178,7 +180,7 @@ width: 75%;
     margin: 1em 0;
     padding: 1em;
     background: var(--main-bg);
-    border: 1px solid #377ba8; /* update this sometime */
+    border: 1px solid var(--border-color);
 }
 
 .post > header {
@@ -198,7 +200,7 @@ width: 75%;
 
 .post .about {
     padding-block: 0.25rem;
-    color: var(--about-text);
+    color: var(--text-color-gray);
     font-style: italic;
     width: 100%
 }
@@ -228,8 +230,14 @@ width: 75%;
     font-size: 1rem;
 }
 
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 .two-buttons {
     display: flex;
+    justify-content: flex-end;
 }
 
 input[type=submit], input[type="button"] {
@@ -237,34 +245,41 @@ input[type=submit], input[type="button"] {
     align-self: start;
     font-size: 1rem;
     text-align: left;
-    color: var(--black);
+    color: var(--text-color-light);
     background-color: var(--submit-btn);
-    border: none;
+    border: solid var(--submit-btn);
     border-radius: 4px;
-    margin-right: 0.5rem;
-}
-
-input[type=button] {
-    background-color: var(--cancel-btn);
+    margin-left: 0.5rem;
 }
 
 input[type=submit]:hover, input[type=submit]:focus {
     background-color: var(--submit-btn-hover);
+    border-color: var(--submit-btn-hover);
     cursor: pointer;
 }
 
+input[type=button] {
+    background-color: var(--cancel-btn);
+    border: solid var(--cancel-btn-border);
+    color: var(--text-color-gray);
+    margin-left: 0;
+}
+
 input[type=button]:hover, input[type=button]:focus {
-    background-color: var(--cancel-btn-hover);
+    border-color: var(--cancel-btn-hover);
+    color: var(--cancel-btn-hover);
     cursor: pointer;
 }
 
 input.danger {
     background-color: var(--delete-btn);
-    color: white;
+    border: solid var(--delete-btn);
+    color: var(--text-color-light);
 }
 
 input.danger:hover, input.danger:focus {
     background-color: var(--delete-btn-hover);
+    border-color: var(--delete-btn-hover);
 }
 
 /* ==== Responsive Media Queries ==== */
