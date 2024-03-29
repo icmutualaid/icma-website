@@ -5,20 +5,22 @@
 {% endblock %}
 
 {% block content %}
+<form id="deleteForm" action="{{ url_for('blog.delete', id=post['id']) }}" method="post"></form>
+
 <form method="post">
     <label for="title">Title</label>
     <input name="title" id="title"
-    value="{{ request.form['title'] or post['title'] }}" required>
+        value="{{ request.form['title'] or post['title'] }}" required>
     <label for="body">Body</label>
     {{ ckeditor.create(name='body', value=post.body) }}
-    <div class="two-buttons">
-        <input type="submit" value="Save">
+    <div class="buttons">
+        <input type="button" value="Cancel" onclick="history.back()">
+        <div class="two-buttons">
+            <input class="danger" type="submit" value="Delete" form="deleteForm"onclick="return confirm('Are you sure?');">
+            <input type="submit" value="Save">
+        </div>
     </div>
 </form>
 {{ ckeditor.load() }}
 {{ ckeditor.config(name='body') }}
-<hr>
-<form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-</form>
 {% endblock %}
