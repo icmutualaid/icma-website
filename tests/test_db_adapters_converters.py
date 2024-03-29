@@ -38,19 +38,14 @@ def test_adapter_datetime_iso(runner):
 
 
 def test_adapter_datetime_epoch(runner):
+    y2020 = datetime(2020, 1,   1,  0,  0,  0)
+    y2022 = datetime(2022, 7,   5, 17, 30,  0)
+    y1999 = datetime(1999, 12, 31, 23, 59, 59)
+
     test_cases = [
-        {
-            'arg': datetime(2020,  1,  1,  0,  0,  0),
-            'out': 1577858400,
-        },
-        {
-            'arg': datetime(2022,  7,  5, 17, 30,  0),
-            'out': 1657060200,
-        },
-        {
-            'arg': datetime(1999, 12, 31, 23, 59, 59),
-            'out': 946706399,
-        },
+        {'arg': y2020, 'out': y2020.timestamp(), },
+        {'arg': y2022, 'out': y2022.timestamp(), },
+        {'arg': y1999, 'out': y1999.timestamp(), },
     ]
 
     for case in test_cases:
