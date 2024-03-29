@@ -86,14 +86,18 @@ def convert_datetime(val):
     return sql_time_bytes_to_datetime(val)
 
 
-def convert_timestamp(val):
+def convert_timestamp(stamp: int | bytes) -> datetime.datetime:
     """Convert Unix epoch timestamp to datetime.datetime object."""
-    # It seems that we actually get a datetime bytestring back from the db.
-    # So we should make sure we handle that case.
-    if (type(val) is int):
-        return datetime.datetime.fromtimestamp(int(val))
-    if (type(val) is bytes):
-        return convert_datetime(val)
+    # sqlite3 documentation says we should expect an epoch time in seconds.
+    # But it seems we actually get a datetime bytestring back from the db.
+    # So we should make sure we handle both cases.
+    # Perhaps this is version-specific???
+    if (type(stamp) is int):
+        return datetime.datetime.fromtimestamp(stamp)
+    if (type(stamp) is bytes):
+        return convert_datetime(stamp)
+    raise TypeError('convert_timestamp: invalid argument type '
+                    '(expected int or bytes)')
 
 
 # Convert an epoch time into a datetime

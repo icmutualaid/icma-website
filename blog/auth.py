@@ -102,6 +102,7 @@ def create_user_command(username, password):
     # insert a user with these credentials
     if error is None:
         db = get_db()
+        print(db)
         try:
             create_user(db, username, password)
             click.echo(f'Successfully registered user {username}.')
