@@ -161,3 +161,6 @@ cython_debug/
 
 # OSX shit
 .DS_Store
+
+# coverage badge
+coverage.svg
