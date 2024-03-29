@@ -282,6 +282,11 @@ input.danger:hover, input.danger:focus {
     border-color: var(--delete-btn-hover);
 }
 
+.floatingchat-container-wrap {
+    margin-bottom: 7rem;
+    margin-inline: 0.5rem;
+}
+
 /* ==== Responsive Media Queries ==== */
 
 @media screen and (max-width: 1050px) {
@@ -333,4 +338,10 @@ input.danger:hover, input.danger:focus {
         margin-top: 1rem;
         margin-bottom: 2rem;
     }
+
+    .floatingchat-container-wrap {
+        margin-bottom: 16rem;
+        margin-inline: 0.5rem;
+    }
+    
 }
