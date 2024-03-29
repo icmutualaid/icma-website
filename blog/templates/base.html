@@ -54,6 +54,10 @@
         {% endfor %}
         {% block content %}{% endblock %}
     </section>
+    
+    {% block donate %}
+        {% include 'donate.html' %}
+    {% endblock %}
     {% include 'footer.html' %}
 </body>
 </html>

@@ -35,4 +35,5 @@
     --cancel-btn-hover: var(--black);
     --delete-btn: var(--red);
     --delete-btn-hover: var(--dark-red);
+    --donate-btn: var(--teal);
 }
