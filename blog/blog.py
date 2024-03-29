@@ -3,8 +3,6 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-import flask_ckeditor
-
 from blog.auth import login_required
 from blog.db import get_db
 
@@ -16,12 +14,6 @@ from blog.db import get_db
 # Then we can also remove the bleach dependency.
 def cleanify(text, *, allow_tags=None):
     import bleach
-    """Clean the input from client, this function rely on bleach.
-
-    :parm text: input str
-    :parm allow_tags: if you don't want to use default `allow_tags`,
-        you can provide a Iterable which include html tag string like ['a', 'li',...].
-    """
     default_allowed_tags = {'a', 'abbr', 'b', 'blockquote', 'code',
                             'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
                             'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'}

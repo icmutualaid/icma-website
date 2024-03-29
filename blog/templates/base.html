@@ -27,9 +27,9 @@
         </a> 
         <div class="topnav" id="topnav">
             <ul>
-                <li><a href="">About</a></li>
-                <li><a href="">Projects</a></li>
-                <li><a href="">Resources</a></li>
+                <li><a href="{{ url_for('content.about') }}">About</a></li>
+                <li><a href="{{ url_for('content.projects') }}">Projects</a></li>
+                <li><a href="{{ url_for('content.resources') }}">Resources</a></li>
                 <li><a href="">Newsletter</a></li>
                 {% if g.user %}
                 <li><span>{{ g.user['username'] }}</span></li>
