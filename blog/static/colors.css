@@ -1,30 +1,39 @@
 :root {
 /* ==== Color Palette ==== */
-    --gray: #e1e1e1;
-    --medium-gray: #c9c9c9;
-    --dark-gray: #adadad;
-    --darker-gray: #707070;
-    --black: #1d1d1d;
-    --red: #cc2f2e;
-    --dark-red: #b12424;
-    --green: #2ecc53;
-    --dark-green: #24b15c;
+    --white: #f7f3f2;
+    --light-gray: #d6d0cf;
+    --medium-gray: #ada3a1;
+    --dark-gray: #6e6866;
+    --black: #1c1919;
+    /* ==== primary ==== */
+    --teal: #178293;
+    --dark-teal: #096877;
+    /* ==== secondary ==== */
+    --green: #d1d413;
+    --dark-green: #a9b70f;
+    /* ==== accent ==== */
+    --red: #cb3d2a;
+    --dark-red: #b13724;
 
 /* ==== Project Color Definitions ==== */
-    --link-color: white;
-    --link-hover: var(--medium-gray);
-    --border-color: var(--gray);
-    --action-hover: var(--darker-gray);
-    --main-bg: white;
+    --link-color: var(--green);
+    --link-hover: var(--dark-green);
+    --border-color: var(--green);
+    --action: var(--teal);
+    --action-hover: var(--dark-teal);
+    --main-bg: var(--white);
     --dark-bg: var(--black);
-    --logo-header: white;
-    --header-text: var(--black);
-    --text-color: var(--black);
-    --about-text: var(--darker-gray);
-    --submit-btn: var(--green);
-    --submit-btn-hover: var(--dark-green);
-    --cancel-btn: var(--medium-gray);
-    --cancel-btn-hover: var(--dark-gray);
+    --header-text-light: var(--white);
+    --header-text-dark: var(--teal);
+    --text-color-light: var(--white);
+    --text-color-dark: var(--black);
+    --text-color-gray: var(--dark-gray);
+    --submit-btn: var(--teal);
+    --submit-btn-hover: var(--dark-teal);
+    --cancel-btn: var(--white);
+    --cancel-btn-border: var(--dark-gray);
+    --cancel-btn-hover: var(--black);
     --delete-btn: var(--red);
     --delete-btn-hover: var(--dark-red);
+    --donate-btn: var(--teal);
 }

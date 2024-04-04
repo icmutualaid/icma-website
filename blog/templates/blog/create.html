@@ -10,11 +10,13 @@
     <input name="title" id="title" value="{{ request.form['title'] }}" required>
     <label for="body">Body</label>
     {{ ckeditor.create(name='body') }}
-    <div class="two-buttons">
-        <input type="submit" value="Save">
+    <div class="buttons">
         <input type="button" value="Cancel" onclick="history.back()">
+        <input type="submit" value="Save">
     </div>
 </form>
 {{ ckeditor.load() }}
 {{ ckeditor.config(name='body') }}
 {% endblock %}
+<!-- override donate button on this page -->
+{% block donate %}{% endblock %}
