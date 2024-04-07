@@ -16,6 +16,7 @@ def create_app(test_config=None):
     _init_instance(app)
     _init_db(app)
     _init_auth(app)
+    _init_newsletter(app)
 
     _init_route(app)
 
@@ -55,12 +56,21 @@ def _init_auth(app):
     from . import auth
     auth.init_app(app)
 
+# register newsletter
+def _init_newsletter(app):
+    from . import newsletter
+    newsletter.init_app(app)
+
 
 # route the request
 def _init_route(app):
     # register the auth blueprint with a url prefix defined in auth.py
     from . import auth
     app.register_blueprint(auth.bp)
+
+    # register the newsletter blueprint with a url prefix defined in newsletter.py
+    from . import newsletter
+    app.register_blueprint(newsletter.bp)
 
     # register the blog blueprint at the site root
     from . import blog
