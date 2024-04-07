@@ -19,6 +19,11 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--header-text-dark)
 }
 
+h2 {
+    color: var(--header-text-medium);
+    font-size: 1.25rem;
+}
+
 a {
     color: var(--link-color);
 }
@@ -119,19 +124,6 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
     padding: 1rem;
 }
 
-.column {
-    float: left;
-    display: flex;
-}
-
-.left {
-width:25%;
-}
-
-.right {
-width: 75%;
-}
-
 .action {
     color: var(--action);
     font-size: 1.25rem;
@@ -180,7 +172,7 @@ width: 75%;
     margin: 1em 0;
     padding: 1em;
     background: var(--main-bg);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--flash-border);
 }
 
 .post > header {
@@ -249,7 +241,6 @@ input[type=submit], input[type="button"] {
     background-color: var(--submit-btn);
     border: solid var(--submit-btn);
     border-radius: 4px;
-    margin-left: 0.5rem;
 }
 
 input[type=submit]:hover, input[type=submit]:focus {
@@ -262,7 +253,6 @@ input[type=button] {
     background-color: var(--cancel-btn);
     border: solid var(--cancel-btn-border);
     color: var(--text-color-gray);
-    margin-left: 0;
 }
 
 input[type=button]:hover, input[type=button]:focus {
@@ -275,6 +265,7 @@ input.danger {
     background-color: var(--delete-btn);
     border: solid var(--delete-btn);
     color: var(--text-color-light);
+    margin-right: 0.5rem;
 }
 
 input.danger:hover, input.danger:focus {
