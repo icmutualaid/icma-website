@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}{{ page.title }}{% endblock %}</h1>
+{% if g.user %}
+<a class="action" href="{{ url_for('blog.create') }}" aria-label="new"><i class="fas fa-plus"></i></a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<article>
+    <header>
+        <div>
+            <h1>{{ page.title }}</h1>
+        </div>
+        {% if g.user.id == page.author_id %}
+        <a class="action edit" href="{{ url_for('page.update', path=page.path) }}" aria-label="edit"><i class="fas fa-edit"></i></a>
+        {% endif %}
+    </header>
+    <p class="body">{{ page.body|safe }}</p>
+</article>
+{% endblock %}

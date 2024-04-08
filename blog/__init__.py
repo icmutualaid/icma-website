@@ -7,15 +7,19 @@ ckeditor = CKEditor()
 
 
 def create_app(test_config=None):
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, static_url_path='/static',
+                instance_relative_config=True)
 
     ckeditor.init_app(app)
 
     _init_config(app, test_config)
 
     _init_instance(app)
+
     _init_db(app)
     _init_auth(app)
+
+    _init_nav(app)
 
     _init_route(app)
 
@@ -56,6 +60,12 @@ def _init_auth(app):
     auth.init_app(app)
 
 
+# build the navbar
+def _init_nav(app):
+    from . import nav
+    nav.configure_navbar(app)
+
+
 # route the request
 def _init_route(app):
     # register the auth blueprint with a url prefix defined in auth.py
@@ -68,5 +78,5 @@ def _init_route(app):
     app.add_url_rule('/', endpoint='index')
 
     # register the static content blueprint
-    from . import content
-    app.register_blueprint(content.bp)
+    from . import page
+    app.register_blueprint(page.bp)

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Edit "{{ page['title'] }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form id="deleteForm" action="{{ url_for('page.delete', id=page['id']) }}" method="post"></form>
+
+<form method="post">
+    <label for="path">Path</label>
+    <input name="path" id="path" value="{{ request.form['path'] }}" required>
+    <label for="title">Title</label>
+    <input name="title" id="title"
+        value="{{ request.form['title'] or page['title'] }}" required>
+    <label for="body">Body</label>
+    {{ ckeditor.create(name='body', value=page.body) }}
+    <div class="buttons">
+        <input type="button" value="Cancel" onclick="history.back()">
+        <div class="two-buttons">
+            <input class="danger" type="submit" value="Delete" form="deleteForm"onclick="return confirm('Are you sure?');">
+            <input type="submit" value="Save">
+        </div>
+    </div>
+</form>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='body') }}
+{% endblock %}
+<!-- override donate button on this page -->
+{% block donate %}{% endblock %}

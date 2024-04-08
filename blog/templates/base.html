@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <title>{% block title %}{% endblock %} - Iowa City Mutual Aid</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/base.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/352d992447.js" crossorigin="anonymous"></script>
 </head>
@@ -22,22 +22,25 @@
     <nav>
         <!-- logo next to header, links to home -->
         <a class="logo" href="/" aria-label="Home">
-            <img src="{{ url_for('static', filename='logo.svg') }}" alt="Iowa City Mutual Aid Logo">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Iowa City Mutual Aid Logo">
             <h1 class="logo-header">Iowa City Mutual Aid</h1>  
         </a> 
         <div class="topnav" id="topnav">
-            <ul>
-                <li><a href="{{ url_for('content.about') }}">About</a></li>
-                <li><a href="{{ url_for('content.projects') }}">Projects</a></li>
-                <li><a href="{{ url_for('content.resources') }}">Resources</a></li>
+            {% block navbar %}
+            {{ nav.top_nav.render() }}
+            {% endblock %}
+            <!-- <ul>
                 <li><a href="">Newsletter</a></li>
+                {% if g.user %}
+                <li><a href="{{ url_for('page.create') }}" aria-label="new">New Page&nbsp;<i class="fas fa-plus"></i></a></li>
+                {% endif %}
                 {% if g.user %}
                 <li><span>{{ g.user['username'] }}</span></li>
                 <li><a href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Log In&nbsp;<i class="fa-solid fa-right-to-bracket"></i></a></li>
                 {% endif %}
-            </ul>
+            </ul> -->
             <!-- hamburger icon for small screens -->
             <a href="javascript:void(0);" class="icon" onclick="collapseMenu()">
                 <i class="fa fa-bars"></i>

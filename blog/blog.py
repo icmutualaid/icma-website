@@ -23,7 +23,7 @@ def cleanify(text, *, allow_tags=None):
 bp = Blueprint('blog', __name__)
 
 
-@bp.route('/')
+@bp.route('/', methods=('GET',))
 def index():
     db = get_db()
     posts = db.execute(
