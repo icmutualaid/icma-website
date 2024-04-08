@@ -1,31 +1,41 @@
-import click;
+import click
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from flask.cli import with_appcontext
+from sqlite3 import IntegrityError
+import sys
 
 from blog.db import get_db
 
 
 bp = Blueprint('newsletter', __name__, url_prefix='/newsletter')
 
+
 # associate the url /signup with the signup view function
 @bp.route('/signup', methods=('GET', 'POST'))
 def signup():
     if request.method == 'POST':
         email = request.form['email']
-        print(email)
 
-        user_email, error = create_user_email(email)
-
-        if error is None:
+        try:
+            create_user_email(email)
             session.clear()
-            session['user_email'] = user_email['email']
+            session['user_email'] = email
             return redirect(url_for('index'))
+        except IntegrityError as e:
+            flash('You have already signed up for our newsletter. Thank you! '
+                  'If you are not receiving our emails, please check your '
+                  'spam folder and contact us if you cannot find them.')
+            print(e, file=sys.stderr)
+            return render_template('content/signup.html')
+        except Exception as e:
+            flash('An error occurred while trying to subscribe to our '
+                  'newsletter. You have not been added to our email list. '
+                  'Please contact us and let us know about the problem.')
+            print(e, file=sys.stderr)
+            return render_template
 
-        flash(error)
-
-    return render_template('content/signup.html')
 
 # register load_logged_in_user before the view function,
 # no matter what URL is requested
@@ -39,6 +49,7 @@ def load_user_email():
         g.user_email = get_db().execute(
             'SELECT * FROM user_email WHERE email = ?', (user_email,)
         ).fetchone()
+
 
 # return the user_email and any error message
 def retrieve_user_email(email):
@@ -55,12 +66,15 @@ def retrieve_user_email(email):
 
     return user_email, error
 
-def create_user_email(db, email):
+
+def create_user_email(email):
+    db = get_db()
     db.execute(
                     'INSERT INTO user_email (email) VALUES (?)',
-                    (email)
+                    ([email])
                 )
     db.commit()
+
 
 # Register a cli command to manually add a user_email
 @click.command('create-user-email')
