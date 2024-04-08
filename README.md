@@ -1,4 +1,4 @@
-![linter](https://github.com/icmutualaid/icma-website/actions/workflows/python-app.yml/badge.svg) ![test coverage](https://img.shields.io/codecov/c/github/icmutualaid/icma-website/main)
+![linter](https://github.com/icmutualaid/icma-website/actions/workflows/tests-linter.yml/badge.svg) ![test coverage](https://img.shields.io/codecov/c/github/icmutualaid/icma-website/main)
 
 # Status
 
