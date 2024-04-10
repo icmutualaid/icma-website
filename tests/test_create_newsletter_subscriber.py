@@ -1,7 +1,8 @@
 import pytest
 
-from blog.db import get_db
 from blog.newsletter import create_newsletter_subscriber
+
+from sqlite3 import IntegrityError
 
 
 class CreateNewsletterSubscriberTester(object):
@@ -11,10 +12,10 @@ class CreateNewsletterSubscriberTester(object):
         self.called_execute = False
         self.called_commit = False
 
-    def execute(self, sql, given_email):
+    def execute(self, sql, given_params):
         self.called_execute = True
         self.given_sql = sql
-        self.given_email = given_email
+        self.given_email = given_params[0]
 
     def commit(self):
         self.called_commit = True
@@ -24,7 +25,7 @@ class CreateNewsletterSubscriberTester(object):
 def cu_tester():
     email = 'testemail'
     tester = CreateNewsletterSubscriberTester(email)
-    create_newsletter_subscriber(tester)
+    create_newsletter_subscriber(tester, email)
     return tester
 
 
@@ -51,11 +52,10 @@ def test_integration_create_newsletter_subscriber(runner, monkeypatch, app,
     class Recorder(object):
         called = False
 
-    def fake_create_newsletter_subscriber(email):
+    def fake_create_newsletter_subscriber(_, email):
         Recorder.called = True
-        db = get_db()
         if email == 'test':
-            raise db.IntegrityError('This email is already signed up')
+            raise IntegrityError('This email is already signed up')
 
     monkeypatch.setattr('blog.newsletter.create_newsletter_subscriber',
                         fake_create_newsletter_subscriber)

@@ -57,12 +57,9 @@ def retrieve_newsletter_subscriber(email):
     return newsletter_subscriber, error
 
 
-def create_newsletter_subscriber(email):
-    db = get_db()
-    db.execute(
-                    'INSERT INTO newsletter_subscriber (email) VALUES (?)',
-                    ([email])
-                )
+def create_newsletter_subscriber(db, email):
+    db.execute('INSERT INTO newsletter_subscriber (email) VALUES (?)',
+               (email,))
     db.commit()
 
 
@@ -78,7 +75,7 @@ def create_newsletter_subscriber_command(email):
         db = get_db()
         print(db)
         try:
-            create_newsletter_subscriber(email)
+            create_newsletter_subscriber(db, email)
             click.echo(f'Successfully signed up email {email}.')
         except db.IntegrityError:
             click.echo(f'Error: Email {email} is already signed up.')
