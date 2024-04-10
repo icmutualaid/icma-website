@@ -1,6 +1,6 @@
 import click
 from flask import (
-    Blueprint, flash, redirect, render_template, request, session, url_for
+    Blueprint, flash, render_template, request, session
 )
 from flask.cli import with_appcontext
 from sqlite3 import IntegrityError
@@ -22,7 +22,9 @@ def signup():
             create_newsletter_subscriber(email)
             session.clear()
             session['newsletter_subscriber'] = email
-            return redirect(url_for('index'))
+            flash('You have successfully signed up for our newsletter. '
+                  'Thank you!')
+            return render_template('newsletter/signup.html')
         except IntegrityError as e:
             flash('You have already signed up for our newsletter. Thank you! '
                   'If you are not receiving our emails, please check your '
