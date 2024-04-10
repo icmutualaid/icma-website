@@ -1,6 +1,6 @@
 import click
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, redirect, render_template, request, session, url_for
 )
 from flask.cli import with_appcontext
 from sqlite3 import IntegrityError
@@ -35,21 +35,6 @@ def signup():
                   'Please contact us and let us know about the problem.')
             print(e, file=sys.stderr)
             return render_template
-
-
-# register load_logged_in_user before the view function,
-# no matter what URL is requested
-@bp.before_app_request
-def load_newsletter_subscriber():
-    newsletter_subscriber = session.get('newsletter_subscriber')
-
-    if newsletter_subscriber is None:
-        g.newsletter_subscriber = None
-    else:
-        g.newsletter_subscriber = get_db().execute(
-            'SELECT * FROM newsletter_subscriber WHERE email = ?',
-            (newsletter_subscriber,)
-        ).fetchone()
 
 
 # return the newsletter_subscriber and any error message
@@ -89,7 +74,7 @@ def create_newsletter_subscriber_command(email):
         db = get_db()
         print(db)
         try:
-            create_newsletter_subscriber(db, email)
+            create_newsletter_subscriber(email)
             click.echo(f'Successfully signed up email {email}.')
         except db.IntegrityError:
             click.echo(f'Error: Email {email} is already signed up.')
