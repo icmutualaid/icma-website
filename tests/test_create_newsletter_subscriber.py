@@ -1,5 +1,6 @@
 import pytest
 
+from blog.db import get_db
 from blog.newsletter import create_newsletter_subscriber
 
 
@@ -23,7 +24,7 @@ class CreateNewsletterSubscriberTester(object):
 def cu_tester():
     email = 'testemail'
     tester = CreateNewsletterSubscriberTester(email)
-    create_newsletter_subscriber(tester, email)
+    create_newsletter_subscriber(tester)
     return tester
 
 
@@ -50,8 +51,9 @@ def test_integration_create_newsletter_subscriber(runner, monkeypatch, app,
     class Recorder(object):
         called = False
 
-    def fake_create_newsletter_subscriber(db, email):
+    def fake_create_newsletter_subscriber(email):
         Recorder.called = True
+        db = get_db()
         if email == 'test':
             raise db.IntegrityError('This email is already signed up')
 
@@ -65,3 +67,18 @@ def test_integration_create_newsletter_subscriber(runner, monkeypatch, app,
 
     assert message in result.output
     assert called is Recorder.called
+
+
+class Newsletter(object):
+    def __init__(self, client):
+        self._client = client
+
+    def signup(self, email='test'):
+        return self._client.post(
+            '/newsletter/signup',
+            data={'email': email}
+        )
+
+
+def newsletter(client):
+    return Newsletter(client)
