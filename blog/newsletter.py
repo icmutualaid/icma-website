@@ -36,6 +36,8 @@ def signup():
             print(e, file=sys.stderr)
             return render_template
 
+    return render_template('newsletter/signup.html')
+
 
 # return the newsletter_subscriber and any error message
 def retrieve_newsletter_subscriber(email):
