@@ -28,7 +28,7 @@ def signup():
                   'If you are not receiving our emails, please check your '
                   'spam folder and contact us if you cannot find them.')
             print(e, file=sys.stderr)
-            return render_template('content/signup.html')
+            return render_template('newsletter/signup.html')
         except Exception as e:
             flash('An error occurred while trying to subscribe to our '
                   'newsletter. You have not been added to our email list. '
