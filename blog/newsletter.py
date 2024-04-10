@@ -19,9 +19,9 @@ def signup():
         email = request.form['email']
 
         try:
-            create_user_email(email)
+            create_newsletter_subscriber(email)
             session.clear()
-            session['user_email'] = email
+            session['newsletter_subscriber'] = email
             return redirect(url_for('index'))
         except IntegrityError as e:
             flash('You have already signed up for our newsletter. Thank you! '
@@ -41,54 +41,55 @@ def signup():
 # no matter what URL is requested
 @bp.before_app_request
 def load_user_email():
-    user_email = session.get('user_email')
+    newsletter_subscriber = session.get('newsletter_subscriber')
 
-    if user_email is None:
-        g.user_email = None
+    if newsletter_subscriber is None:
+        g.newsletter_subscriber = None
     else:
-        g.user_email = get_db().execute(
-            'SELECT * FROM user_email WHERE email = ?', (user_email,)
+        g.newsletter_subscriber = get_db().execute(
+            'SELECT * FROM newsletter_subscriber WHERE email = ?',
+            (newsletter_subscriber,)
         ).fetchone()
 
 
-# return the user_email and any error message
-def retrieve_user_email(email):
+# return the newsletter_subscriber and any error message
+def retrieve_newsletter_subscriber(email):
     db = get_db()
 
     error = None
 
-    user_email = db.execute(
-            'SELECT * FROM user_email WHERE email = ?', (email,)
+    newsletter_subscriber = db.execute(
+            'SELECT * FROM newsletter_subscriber WHERE email = ?', (email,)
         ).fetchone()
 
-    if user_email is None:
+    if newsletter_subscriber is None:
         error = 'Email not found.'
 
-    return user_email, error
+    return newsletter_subscriber, error
 
 
-def create_user_email(email):
+def create_newsletter_subscriber(email):
     db = get_db()
     db.execute(
-                    'INSERT INTO user_email (email) VALUES (?)',
+                    'INSERT INTO newsletter_subscriber (email) VALUES (?)',
                     ([email])
                 )
     db.commit()
 
 
-# Register a cli command to manually add a user_email
+# Register a cli command to manually add a newsletter_subscriber
 @click.command('create-user-email')
 @click.argument('email')
 @with_appcontext
-def create_user_email_command(email):
+def create_newsletter_subscriber_command(email):
     error = validate_credentials(email)
 
-    # insert a user_email with these credentials
+    # insert a newsletter_subscriber with these credentials
     if error is None:
         db = get_db()
         print(db)
         try:
-            create_user_email(db, email)
+            create_newsletter_subscriber(db, email)
             click.echo(f'Successfully signed up email {email}.')
         except db.IntegrityError:
             click.echo(f'Error: Email {email} is already signed up.')
@@ -97,8 +98,8 @@ def create_user_email_command(email):
 
 
 def init_app(app):
-    # define the create-user-email cli command
-    app.cli.add_command(create_user_email_command)
+    # define the create-newsletter-subscriber cli command
+    app.cli.add_command(create_newsletter_subscriber_command)
 
 
 def validate_credentials(email):

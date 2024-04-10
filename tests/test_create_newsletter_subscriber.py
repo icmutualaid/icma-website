@@ -1,9 +1,9 @@
 import pytest
 
-from blog.newsletter import create_user_email
+from blog.newsletter import create_newsletter_subscriber
 
 
-class CreateUserEmailTester(object):
+class CreateNewsletterSubscriberTester(object):
     def __init__(self, expect_email):
         self.expect_email = expect_email
         self.given_email = None
@@ -22,8 +22,8 @@ class CreateUserEmailTester(object):
 @pytest.fixture
 def cu_tester():
     email = 'testemail'
-    tester = CreateUserEmailTester(email)
-    create_user_email(tester, email)
+    tester = CreateNewsletterSubscriberTester(email)
+    create_newsletter_subscriber(tester, email)
     return tester
 
 
@@ -45,22 +45,22 @@ def test_passed_correct_execute_params(cu_tester):
     ('', 'Email is required.', False),
     ('test', 'already signed up', True),
 ))
-def test_integration_create_user_email(runner, monkeypatch, app,
-                                       email, message, called):
+def test_integration_create_newsletter_subscriber(runner, monkeypatch, app,
+                                                  email, message, called):
     class Recorder(object):
         called = False
 
-    def fake_create_user_email(db, email):
+    def fake_create_newsletter_subscriber(db, email):
         Recorder.called = True
         if email == 'test':
             raise db.IntegrityError('This email is already signed up')
 
-    monkeypatch.setattr('blog.newsletter.create_user_email',
-                        fake_create_user_email)
+    monkeypatch.setattr('blog.newsletter.create_newsletter_subscriber',
+                        fake_create_newsletter_subscriber)
 
     with app.app_context():
         result = runner.invoke(
-            args=['create-user-email', email]
+            args=['create-newsletter-subscriber', email]
             )
 
     assert message in result.output

@@ -8,8 +8,7 @@ CREATE TABLE user (
     password TEXT NOT NULL
 );
 
-CREATE TABLE user_email (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE newsletter_subscriber (
     email TEXT UNIQUE NOT NULL
 );
 
