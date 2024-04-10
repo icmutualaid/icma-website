@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS user_email;
+DROP TABLE IF EXISTS newsletter_subscriber;
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (

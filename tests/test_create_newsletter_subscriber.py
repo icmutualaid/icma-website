@@ -33,7 +33,7 @@ def test_called_db_functions(cu_tester):
 
 
 def test_passed_correct_execute_params(cu_tester):
-    assert cu_tester.given_sql.startswith('INSERT INTO user_email '
+    assert cu_tester.given_sql.startswith('INSERT INTO newsletter_subscriber '
                                           '(email)')
     assert cu_tester.given_email == cu_tester.expect_email
 

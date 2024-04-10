@@ -40,7 +40,7 @@ def signup():
 # register load_logged_in_user before the view function,
 # no matter what URL is requested
 @bp.before_app_request
-def load_user_email():
+def load_newsletter_subscriber():
     newsletter_subscriber = session.get('newsletter_subscriber')
 
     if newsletter_subscriber is None:
@@ -78,7 +78,7 @@ def create_newsletter_subscriber(email):
 
 
 # Register a cli command to manually add a newsletter_subscriber
-@click.command('create-user-email')
+@click.command('create-newsletter-subscriber')
 @click.argument('email')
 @with_appcontext
 def create_newsletter_subscriber_command(email):
