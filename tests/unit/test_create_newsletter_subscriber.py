@@ -40,7 +40,8 @@ def test_passed_correct_execute_params(cu_tester):
     assert cu_tester.given_email == cu_tester.expect_email
 
 
-# The create-user command should call create_user iff it has valid params.
+# The create-newsletter-subscriber command should call
+# create_newsletter_subscriber iff it has valid params.
 # Invalid data should display error messages.
 @pytest.mark.parametrize(('email', 'message', 'called'), (
     ('testemail', 'Successfully signed up', True),
@@ -67,18 +68,3 @@ def test_integration_create_newsletter_subscriber(runner, monkeypatch, app,
 
     assert message in result.output
     assert called is Recorder.called
-
-
-class Newsletter(object):
-    def __init__(self, client):
-        self._client = client
-
-    def signup(self, email='test'):
-        return self._client.post(
-            '/newsletter/signup',
-            data={'email': email}
-        )
-
-
-def newsletter(client):
-    return Newsletter(client)

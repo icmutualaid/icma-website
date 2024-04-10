@@ -19,24 +19,21 @@ def signup():
         email = request.form['email']
 
         try:
-            create_newsletter_subscriber(email)
+            create_newsletter_subscriber(get_db(), email)
             session.clear()
             session['newsletter_subscriber'] = email
             flash('You have successfully signed up for our newsletter. '
                   'Thank you!')
-            return render_template('newsletter/signup.html')
         except IntegrityError as e:
             flash('You have already signed up for our newsletter. Thank you! '
                   'If you are not receiving our emails, please check your '
                   'spam folder and contact us if you cannot find them.')
             print(e, file=sys.stderr)
-            return render_template('newsletter/signup.html')
         except Exception as e:
             flash('An error occurred while trying to subscribe to our '
                   'newsletter. You have not been added to our email list. '
                   'Please contact us and let us know about the problem.')
             print(e, file=sys.stderr)
-            return render_template
 
     return render_template('newsletter/signup.html')
 
