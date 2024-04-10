@@ -17,7 +17,7 @@ def test_create_user(runner, monkeypatch, app):
     class Recorder(object):
         called = False
 
-    def fake_create_user(db, username, password):
+    def fake_create_user(*_):
         Recorder.called = True
 
     monkeypatch.setattr('blog.auth.create_user', fake_create_user)

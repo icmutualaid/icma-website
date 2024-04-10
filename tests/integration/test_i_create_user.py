@@ -9,8 +9,8 @@ import pytest
     ('a', '', 'Password is required.', False),
     ('test', 'test', 'already registered', True),
 ))
-def test_create_user(runner, monkeypatch, app,
-                     username, password, message, called):
+def test_integration_create_user(runner, monkeypatch, app,
+                                 username, password, message, called):
     class Recorder(object):
         called = False
 

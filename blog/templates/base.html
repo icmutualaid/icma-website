@@ -30,7 +30,7 @@
                 <li><a href="{{ url_for('content.about') }}">About</a></li>
                 <li><a href="{{ url_for('content.projects') }}">Projects</a></li>
                 <li><a href="{{ url_for('content.resources') }}">Resources</a></li>
-                <li><a href="">Newsletter</a></li>
+                <li><a href="{{ url_for('newsletter.signup') }}">Newsletter</a></li>
                 {% if g.user %}
                 <li><span>{{ g.user['username'] }}</span></li>
                 <li><a href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
