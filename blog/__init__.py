@@ -56,6 +56,7 @@ def _init_auth(app):
     from . import auth
     auth.init_app(app)
 
+
 # register newsletter
 def _init_newsletter(app):
     from . import newsletter
@@ -68,7 +69,8 @@ def _init_route(app):
     from . import auth
     app.register_blueprint(auth.bp)
 
-    # register the newsletter blueprint with a url prefix defined in newsletter.py
+    # register the newsletter blueprint with a url prefix
+    # defined in newsletter.py
     from . import newsletter
     app.register_blueprint(newsletter.bp)
 

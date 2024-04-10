@@ -68,6 +68,7 @@ class AuthActions(object):
 def auth(client):
     return AuthActions(client)
 
+
 class Newsletter(object):
     def __init__(self, client):
         self._client = client
@@ -77,6 +78,7 @@ class Newsletter(object):
             '/newsletter/signup',
             data={'email': email}
         )
+
 
 def newsletter(client):
     return Newsletter(client)

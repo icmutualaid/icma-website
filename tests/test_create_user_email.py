@@ -2,6 +2,7 @@ import pytest
 
 from blog.newsletter import create_user_email
 
+
 class CreateUserEmailTester(object):
     def __init__(self, expect_email):
         self.expect_email = expect_email
@@ -17,6 +18,7 @@ class CreateUserEmailTester(object):
     def commit(self):
         self.called_commit = True
 
+
 @pytest.fixture
 def cu_tester():
     email = 'testemail'
@@ -24,14 +26,17 @@ def cu_tester():
     create_user_email(tester, email)
     return tester
 
+
 def test_called_db_functions(cu_tester):
     assert cu_tester.called_execute
     assert cu_tester.called_commit
+
 
 def test_passed_correct_execute_params(cu_tester):
     assert cu_tester.given_sql.startswith('INSERT INTO user_email '
                                           '(email)')
     assert cu_tester.given_email == cu_tester.expect_email
+
 
 # The create-user command should call create_user iff it has valid params.
 # Invalid data should display error messages.
@@ -41,7 +46,7 @@ def test_passed_correct_execute_params(cu_tester):
     ('test', 'already signed up', True),
 ))
 def test_integration_create_user_email(runner, monkeypatch, app,
-                                 email, message, called):
+                                       email, message, called):
     class Recorder(object):
         called = False
 
@@ -50,7 +55,8 @@ def test_integration_create_user_email(runner, monkeypatch, app,
         if email == 'test':
             raise db.IntegrityError('This email is already signed up')
 
-    monkeypatch.setattr('blog.newsletter.create_user_email', fake_create_user_email)
+    monkeypatch.setattr('blog.newsletter.create_user_email',
+                        fake_create_user_email)
 
     with app.app_context():
         result = runner.invoke(
