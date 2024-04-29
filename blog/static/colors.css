@@ -38,4 +38,5 @@
     --delete-btn-hover: var(--dark-red);
     --donate-btn: var(--teal);
     --flash-border: var(--red);
+    --num: var(--red);
 }

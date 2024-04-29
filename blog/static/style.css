@@ -278,6 +278,44 @@ input.danger:hover, input.danger:focus {
     margin-inline: 0.5rem;
 }
 
+.col-container {
+    display: flex;
+
+    .col1 {
+        width: 30%;
+        padding-right: 1rem;
+    }
+
+    .col2 {
+        width: 70%;
+        padding-left: 1rem;
+    }
+}
+
+ol { 
+    list-style: none; 
+    counter-reset: num;
+    padding: 0; 
+} 
+
+ol li { 
+    counter-increment: num; 
+    padding-bottom: 1rem;
+} 
+
+ol li::before { 
+    content: counter(num) ". "; 
+    color: var(--num);
+    font-weight: bold;
+    font-size: 1.125rem;
+} 
+
+img {
+    width: 100%;
+    max-width: 100%;
+    margin-block: 1rem;
+}
+
 /* ==== Responsive Media Queries ==== */
 
 @media screen and (max-width: 1050px) {
