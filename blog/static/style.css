@@ -38,6 +38,12 @@ a:hover, a:focus {
     align-items: center;
 }
 
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 @media screen and (max-width: 600px) {
     .contact {
         display: block;
@@ -50,7 +56,7 @@ a:hover, a:focus {
     text-decoration: none;
 }
 
-.contact a, .contact p {
+.contact a, .location {
     padding: 1rem;
     margin: 0;
 }
@@ -110,6 +116,8 @@ nav {
 .footer-content {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 nav ul, .footer ul  {
@@ -273,11 +281,6 @@ input.danger:hover, input.danger:focus {
     border-color: var(--delete-btn-hover);
 }
 
-.floatingchat-container-wrap {
-    margin-bottom: 7rem;
-    margin-inline: 0.5rem;
-}
-
 .col-container {
     display: flex;
 
@@ -323,6 +326,12 @@ img {
         display: none;
     }
 }
+
+@media screen and (max-width: 960px) {
+    .footer, .footer-content {
+        flex-direction: column;
+    }
+}
   
 @media screen and (max-width: 780px) {
     nav {
@@ -355,22 +364,17 @@ img {
 }
 
 @media screen and (max-width: 650px) {
-    .footer, .footer-content {
-        flex-direction: column;
-    }
-
     .location {
         text-align: center;
+        padding-top: 0rem;
+    }
+
+    .logo {
+        margin-bottom: 0.5rem;
     }
 
     .contact {
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-    }
-
-    .floatingchat-container-wrap {
-        margin-bottom: 16rem;
-        margin-inline: 0.5rem;
-    }
-    
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }  
 }
