@@ -6,37 +6,46 @@
     --dark-gray: #6e6866;
     --black: #1c1919;
     /* ==== primary ==== */
-    --teal: #178293;
-    --dark-teal: #096877;
-    /* ==== secondary ==== */
+    /* main color is for use on black bg, dark color is for use on white bg */
     --green: #d1d413;
-    --dark-green: #a9b70f;
+    --dark-green: #697209;
+    --darker-green: #545c0a;
+    /* ==== secondary ==== */
+    --teal: #5bc5d6;
+    --dark-teal: #096877;
+    --darker-teal: #06424b;
     /* ==== accent ==== */
-    --red: #cb3d2a;
-    --dark-red: #b13724;
+    --red: #DE6D5E;
+    --dark-red: #A13221;
+    --darker-red: #7c2012;
+    /* ==== old colors! don't use! ==== */
+    /* --red: #cb3d2a;
+    --dark-red: #b13724; 
+    --teal: #178293; 
+    --dark-green: #a9b70f;*/
 
 /* ==== Project Color Definitions ==== */
     --link-color: var(--green);
-    --link-hover: var(--dark-green);
-    --border-color: var(--green);
-    --action: var(--teal);
-    --action-hover: var(--dark-teal);
+    --link-hover: var(--teal);
+    --border-color: var(--dark-red);
+    --action: var(--dark-teal);
+    --action-hover: var(--darker-teal);
     --main-bg: var(--white);
     --dark-bg: var(--black);
     --header-text-light: var(--white);
-    --header-text-medium: var(--teal);
-    --header-text-dark: var(--dark-teal);
+    --header-text-medium: var(--dark-teal);
+    --header-text-dark: var(--darker-green);
     --text-color-light: var(--white);
     --text-color-dark: var(--black);
     --text-color-gray: var(--dark-gray);
-    --submit-btn: var(--teal);
-    --submit-btn-hover: var(--dark-teal);
+    --submit-btn: var(--dark-green);
+    --submit-btn-hover: var(--darker-green);
     --cancel-btn: var(--white);
     --cancel-btn-border: var(--dark-gray);
     --cancel-btn-hover: var(--black);
-    --delete-btn: var(--red);
-    --delete-btn-hover: var(--dark-red);
-    --donate-btn: var(--teal);
-    --flash-border: var(--red);
-    --num: var(--red);
+    --delete-btn: var(--dark-red);
+    --delete-btn-hover: var(--darker-red);
+    --donate-btn: var(--dark-teal);
+    --flash-border: var(--dark-red);
+    --num: var(--dark-red);
 }
