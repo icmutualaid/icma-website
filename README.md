@@ -2,17 +2,13 @@
 
 # Status
 
-The site is not yet ready for the public. We expect to go live sometime in April 2024.
+The site is ready for deployment and waiting on a server setup. :)
 
 # Roadmap
 
-We've stolen some basic blogging features from [the Flask tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/).
+The blog is ready to go! We just need to start writing regular content.
 
-We should improve upon these features by swapping out the plain text blog interface with a feature-rich WYSIWYG like CKEditor.
-
-We need to customize the website's appearance, audit it for accessibility, deploy it on our webserver, and get the blog up and running.
-
-Then, we'll decide on wiki software and implement it. We'll either include that software in this project or host it separately and include a link.
+I'd like to implement a wiki on a subdomain. We'll either include that software in this project or host it separately and include a link.
 
 # Contribution and Workflow
 
