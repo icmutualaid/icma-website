@@ -24,13 +24,30 @@ h2 {
     font-size: 1.25rem;
 }
 
-a {
-    color: var(--link-color);
+a.navlink {
+    color: var(--navlink-color);
 }
 
-a:hover, a:focus {
+a.navlink:hover, a.navlink:focus {
+    color: var(--navlink-hover);
+    text-decoration: none;
+}
+
+a.dark {
+    font-weight: bold;
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+a.dark:hover, a.dark:focus {
     color: var(--link-hover);
     text-decoration: none;
+}
+
+.link-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .contact {

@@ -25,9 +25,11 @@
     --dark-green: #a9b70f;*/
 
 /* ==== Project Color Definitions ==== */
-    --link-color: var(--green);
-    --link-hover: var(--teal);
-    --link-current: var(--red); /* not implemented yet but i'd like to */
+    --navlink-color: var(--green);
+    --navlink-hover: var(--teal);
+    --navlink-current: var(--red); /* not implemented yet but i'd like to */
+    --link-color: var(--dark-red);
+    --link-hover: var(--darker-red);
     --border-color: var(--dark-red);
     --action: var(--dark-teal);
     --action-hover: var(--darker-teal);

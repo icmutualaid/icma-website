@@ -27,16 +27,16 @@
         </a> 
         <div class="topnav" id="topnav">
             <ul>
-                <li><a href="{{ url_for('content.about') }}">About</a></li>
-                <li><a href="/">Blog</a></li>
-                <li><a href="{{ url_for('content.projects') }}">Projects</a></li>
-                <li><a href="{{ url_for('content.resources') }}">Resources</a></li>
-                <li><a href="{{ url_for('newsletter.signup') }}">Newsletter</a></li>
+                <li><a class="navlink" href="{{ url_for('content.about') }}">About</a></li>
+                <li><a class="navlink" href="/">Blog</a></li>
+                <li><a class="navlink" href="{{ url_for('content.projects') }}">Projects</a></li>
+                <li><a class="navlink" href="{{ url_for('content.resources') }}">Resources</a></li>
+                <li><a class="navlink" href="{{ url_for('newsletter.signup') }}">Newsletter</a></li>
                 {% if g.user %}
                 <li><span>{{ g.user['username'] }}</span></li>
-                <li><a href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
+                <li><a class="navlink" href="{{ url_for('auth.logout') }}">Log Out&nbsp;<i class="fa-solid fa-right-from-bracket"></i></a></li>
                 {% else %}
-                <li><a href="{{ url_for('auth.login') }}">Log In&nbsp;<i class="fa-solid fa-right-to-bracket"></i></a></li>
+                <li><a class="navlink" href="{{ url_for('auth.login') }}">Log In&nbsp;<i class="fa-solid fa-right-to-bracket"></i></a></li>
                 {% endif %}
             </ul>
             <!-- hamburger icon for small screens -->
@@ -56,9 +56,10 @@
         {% block content %}{% endblock %}
     </section>
     
-    {% block donate %}
+   <!-- {% block donate %}
         {% include 'donate.html' %}
-    {% endblock %}
+    {% endblock %} --> 
+    
     {% include 'footer.html' %}
 </body>
 </html>
