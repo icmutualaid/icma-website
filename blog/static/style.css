@@ -70,13 +70,13 @@ hr {
     display: flex;
     text-wrap: nowrap;
     text-decoration: none;
-    min-width: 100px;
-    width: 100px;
-    max-width: 100px;
+    min-width: 75px;
+    width: 75px;
+    max-width: 75px;
     padding-inline: 1rem;
 
     .logo-header {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         padding-inline: 1rem;
         margin: auto;
         color: var(--header-text-light)
@@ -91,14 +91,14 @@ hr {
     padding-inline: 1rem;
 }
 
-/* dark full-width na & footer */
+/* dark full-width nav & footer */
 nav {
     background: var(--dark-bg); 
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: .25rem;
     color: var(--text-color-light);
 }
 
@@ -108,7 +108,7 @@ nav {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: .25rem;
     margin-top: auto;
     color: var(--text-color-light);
 }

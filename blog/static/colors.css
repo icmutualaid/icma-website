@@ -27,6 +27,7 @@
 /* ==== Project Color Definitions ==== */
     --link-color: var(--green);
     --link-hover: var(--teal);
+    --link-current: var(--red); /* not implemented yet but i'd like to */
     --border-color: var(--dark-red);
     --action: var(--dark-teal);
     --action-hover: var(--darker-teal);
