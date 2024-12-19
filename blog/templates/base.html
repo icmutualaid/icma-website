@@ -14,8 +14,12 @@
             var x = document.getElementById("topnav");
             if (x.className === "topnav") {
                 x.className += " responsive";
+                // replace icon with xmark
+                document.getElementById("bars").className = "fas fa-times";
             } else {
                 x.className = "topnav";
+                // replace icon with bars
+                document.getElementById("bars").className = "fa fa-bars";
             }
         }
     </script>
@@ -41,7 +45,7 @@
             </ul>
             <!-- hamburger icon for small screens -->
             <a href="javascript:void(0);" class="icon" onclick="collapseMenu()">
-                <i class="fa fa-bars"></i>
+                <i id="bars" class="fa fa-bars"></i>
             </a>
         </div>
     </nav>
