@@ -44,10 +44,11 @@ a.dark:hover, a.dark:focus {
     text-decoration: none;
 }
 
-.link-container {
+.link-container, .project-container {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .contact {
@@ -177,7 +178,7 @@ nav ul li a, nav ul li span, .footer ul li a, .footer ul li span, header .action
 }
 
 .content {
-    width: 90%;
+    width: 50%;
     margin: 0 auto;
     padding-top: 1.5rem;
     padding-bottom: 3rem;
