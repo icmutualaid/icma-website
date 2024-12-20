@@ -205,6 +205,10 @@ img {
         text-decoration: none;
     }
 
+    li.list-item {
+        padding-block: .25rem;
+    }
+
     /* blog post */
     .post > header {
         display: flex;
