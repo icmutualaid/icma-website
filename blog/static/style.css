@@ -152,6 +152,11 @@ h2 {
     font-size: 1.25rem;
 }
 
+h3 {
+    color: var(--header-text-gray);
+    font-size: 1.125rem;
+}
+
 .content {
     width: 50%;
     margin: 0 auto;
@@ -187,20 +192,25 @@ img {
     margin-block: 1rem;
 }
 
-.link-container, .project-container {
+.link-container {
     width: 100%;
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
 }
+
+.project {
+    padding-bottom: 1rem;
+}
+
     /* links */
-    a.dark {
+    a.main {
         font-weight: bold;
         color: var(--link-color);
         text-decoration: underline;
     }
 
-    a.dark:hover, a.dark:focus {
+    a.main:hover, a.main:focus {
         color: var(--link-hover);
         text-decoration: none;
     }
