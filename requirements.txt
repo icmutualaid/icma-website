@@ -1,7 +1,5 @@
 bleach==6.2.0
 blinker==1.9.0
-# Editable Git install with no remote (blog==1.0.0)
--e /usr/lib/icma-website
 click==8.1.8
 coverage==7.6.10
 Flask==3.1.0
