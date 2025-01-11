@@ -2,6 +2,7 @@ bleach
 coverage
 flask
 flask-ckeditor
+gunicorn
 psycopg2-binary
 pytest
 werkzeug
