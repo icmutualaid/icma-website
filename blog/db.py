@@ -1,5 +1,6 @@
 import datetime
 import psycopg2
+import psycopg2.extras
 
 import click
 # g is a special object that is unique for each request
@@ -8,14 +9,15 @@ import click
 from flask import current_app, g
 
 
-# creates and returns the db connection
+# creates and returns the db cursor
 def get_db():
     # cache the db connection as g.db
     # in case we call get_db multiple times for the same request
     if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            sslmode='require'
+        g.db = psycopg2.connect(
+            current_app.config['DATABASE_URL'],
+            # sslmode='require',
+            cursor_factory=psycopg2.extras.RealDictCursor
         )
 
     return g.db
@@ -34,8 +36,8 @@ def close_db(e=None):
 def init_db():
     db = get_db()
 
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
+    # with current_app.open_resource('schema.sql') as f:
+    #     db.executescript(f.read().decode('utf8'))
 
 
 def init_app(app):

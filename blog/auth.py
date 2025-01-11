@@ -48,9 +48,11 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-        ).fetchone()
+        db = get_db().cursor()
+        db.execute(
+            'SELECT * FROM blog_user WHERE id = (%s)', (user_id,)
+        )
+        g.user = db.fetchone()
 
 
 # decorator to check for a login for actions that require it
@@ -67,13 +69,17 @@ def login_required(view):
 
 # check credentials and return the user and any error message
 def retrieve_user(username, password):
-    db = get_db()
+    db = get_db().cursor()
 
     error = None
 
-    user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
-        ).fetchone()
+    db.execute(
+            'SELECT * FROM blog_user WHERE username = (%s)', (username,)
+        )
+    user = db.fetchone()
+
+    print(username)
+    print(user)
 
     if user is None:
         error = 'Incorrect username.'
@@ -85,9 +91,10 @@ def retrieve_user(username, password):
 
 def create_user(db, username, password):
     db.execute(
-                    'INSERT INTO user (username, password) VALUES (?, ?)',
-                    (username, generate_password_hash(password)),
-                )
+            'INSERT INTO blog_user (username, password) '
+            'VALUES ((%s), (%s))',
+            (username, generate_password_hash(password)),
+        )
     db.commit()
 
 
@@ -101,7 +108,7 @@ def create_user_command(username, password):
 
     # insert a user with these credentials
     if error is None:
-        db = get_db()
+        db = get_db().cursor()
         print(db)
         try:
             create_user(db, username, password)

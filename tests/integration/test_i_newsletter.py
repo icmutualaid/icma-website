@@ -20,7 +20,7 @@ def test_signup_post_ok(client, app):
     assert b'You have successfully signed up' in response.data
 
     with app.app_context():
-        db = get_db()
+        db = get_db().cursor()
         count = db.execute('SELECT COUNT(email) '
                            'FROM newsletter_subscriber').fetchone()[0]
         assert count == 2
@@ -39,7 +39,7 @@ def test_signup_post_duplicate(client, app):
     assert b'You have already signed up' in response.data
 
     with app.app_context():
-        db = get_db()
+        db = get_db().cursor()
         count = db.execute('SELECT COUNT(email) '
                            'FROM newsletter_subscriber').fetchone()[0]
         assert count == 2

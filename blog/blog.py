@@ -25,12 +25,15 @@ bp = Blueprint('blog', __name__)
 
 @bp.route('/')
 def index():
-    db = get_db()
-    posts = db.execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
+    db = get_db().cursor()
+    db.execute(
+        'SELECT p.id, title, body, created, author, username'
+        ' FROM post p JOIN blog_user u ON p.author = u.id'
         ' ORDER BY created DESC'
-    ).fetchall()
+    )
+    posts = db.fetchall()
+    if posts is None:
+        posts = []
     return render_template('blog/index.html', posts=posts)
 
 
@@ -63,9 +66,9 @@ def create():
             flash(error)
         else:
             db = get_db()
-            db.execute(
-                'INSERT INTO post (title, body, author_id)'
-                ' VALUES (?, ?, ?)',
+            db.cursor().execute(
+                'INSERT INTO post (title, body, author)'
+                ' VALUES ((%s), (%s), (%s))',
                 (title, body, g.user['id'])
             )
             db.commit()
@@ -77,20 +80,22 @@ def create():
 # retrieve a post with the given id
 # check_author is True if a request needs authentication, e.g., editing a post
 def get_post(id, check_author=True):
-    post = get_db().execute(
+    db = get_db().cursor()
+    db.execute(
         """
-        SELECT p.id, title, body, created, author_id, username
-        FROM post p JOIN user u ON p.author_id = u.id
+        SELECT p.id, title, body, created, author, username
+        FROM post p JOIN blog_user u ON p.author = u.id
         WHERE p.id = ?
         """,
         (id,)
-    ).fetchone()
+    )
+    post = db.fetchone()
 
     if post is None:
         abort(404, f"Post id {id} doesn't exist.")
 
     # abort raises an exception, so we now know that post is not None
-    if check_author and post['author_id'] != g.user['id']:
+    if check_author and post['author'] != g.user['id']:
         abort(403)
 
     return post
@@ -113,7 +118,7 @@ def update(id):
             flash(error)
         else:
             db = get_db()
-            db.execute(
+            db.cursor().execute(
                 'UPDATE post SET title = ?, body = ?'
                 ' WHERE id = ?',
                 (title, body, id)
@@ -129,6 +134,6 @@ def update(id):
 def delete(id):
     get_post(id)
     db = get_db()
-    db.execute('DELETE FROM post WHERE id = ?', (id,))
+    db.cursor().execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('blog.index'))

@@ -2,6 +2,6 @@ bleach
 coverage
 flask
 flask-ckeditor
-psycopg2
+psycopg2-binary
 pytest
 werkzeug
