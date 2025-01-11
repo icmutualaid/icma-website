@@ -1,1 +1,1 @@
-web: gunicorn  --config gunicorn.conf.py blog.wsgi
+web: gunicorn blog.wsgi
