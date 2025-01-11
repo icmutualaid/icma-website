@@ -1,14 +1,6 @@
-![linter](https://github.com/icmutualaid/icma-website/actions/workflows/tests-linter.yml/badge.svg) ![test coverage](https://img.shields.io/codecov/c/github/icmutualaid/icma-website/main)
+![test coverage](https://img.shields.io/codecov/c/github/icmutualaid/icma-website/main)
 
-# Status
-
-The site is ready for deployment and waiting on a server setup. :)
-
-# Roadmap
-
-The blog is ready to go! We just need to start writing regular content.
-
-I'd like to implement a wiki on a subdomain. We'll either include that software in this project or host it separately and include a link.
+This is the source for our website at [icmutualaid.org](https://icmutualaid.org/).
 
 # Contribution and Workflow
 
@@ -24,47 +16,8 @@ To manually run tests: `coverage run -m pytest`
 
 Also see [our project wiki](https://github.com/icmutualaid/icma-website/wiki/) for more information.
 
-## Installation
-
-See [the Installation page on our project wiki](https://github.com/icmutualaid/icma-website/wiki/Installation) for detailed instructions.
-
 # About Our Organization
 
 We are the Iowa City Mutual Aid collective.
 
-Check our profile [@icmutualaid](https://github.com/icmutualaid) if you want to get in contact.
-
-## Our Mission
-
-We work to meet the survival needs of people whom our systems continue to fail.
-
-We do this because the conditions in which we are made to live are unjust. Our local, state, and national governments all continue to neglect crises and leave people behind.
-
-We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
-
-# The Project and Our Principles
-
-## We are resourceful.
-
-The purpose of this project is to eliminate overhead costs. Every dollar spent on a website builder is one less dollar spent on propane.
-
-We will choose wisely which services to take on ourselves, because this is all for nothing if the collective has to hire a developer to rescue our project.
-
-## We cannot be beheaded.
-
-The project can never rest on one or two people's shoulders. Other members and other collectives must be able to continue our work. We must:
-
-- Write code that is easy to read, maintain, extend, and test.
-- Build a project that is easy to install and migrate.
-- Maintain excellent documentation.
-- Train each other on maintenance and operations.
-- Keep an archive with regular backups.
-- Keep the project free, open source, and discoverable.
-
-## We leave no one behind.
-
-Inaccessible is never "good enough for now." Our site will always be easy to parse with accessibility and translation software. Our specific goal is for the production site to always be fully WCAG 2.1 AA compliant.
-
-## We share our skills.
-
-To that end, we will collaborate on development and operations.
+Check our profile [@icmutualaid](https://github.com/icmutualaid) or our website at [icmutualaid.org](https://icmutualaid.org/) if you want to get in contact.
