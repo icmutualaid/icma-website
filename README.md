@@ -1,8 +1,6 @@
-![linter](https://github.com/icmutualaid/icma-website/actions/workflows/tests-linter.yml/badge.svg) ![test coverage](https://img.shields.io/codecov/c/github/icmutualaid/icma-website/main)
+![test coverage](https://img.shields.io/codecov/c/github/icmutualaid/icma-website/main)
 
-# Status
-
-The site is ready for deployment and waiting on a server setup. :)
+This is the source for our website at [icmutualaid.org](https://icmutualaid.org/).
 
 # Roadmap
 
@@ -32,15 +30,7 @@ See [the Installation page on our project wiki](https://github.com/icmutualaid/i
 
 We are the Iowa City Mutual Aid collective.
 
-Check our profile [@icmutualaid](https://github.com/icmutualaid) if you want to get in contact.
-
-## Our Mission
-
-We work to meet the survival needs of people whom our systems continue to fail.
-
-We do this because the conditions in which we are made to live are unjust. Our local, state, and national governments all continue to neglect crises and leave people behind.
-
-We must work toward liberation by meeting needs that are unmet by the capitalist class who control the wealth and the state.
+Check our profile [@icmutualaid](https://github.com/icmutualaid) or our website at [icmutualaid.org](https://icmutualaid.org/) if you want to get in contact.
 
 # The Project and Our Principles
 
