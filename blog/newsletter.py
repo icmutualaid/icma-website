@@ -46,7 +46,7 @@ def retrieve_newsletter_subscriber(email):
     error = None
 
     db.execute(
-            'SELECT * FROM newsletter_subscriber WHERE email = ?', (email,)
+            'SELECT * FROM newsletter_subscriber WHERE email = (%s)', (email,)
         )
     newsletter_subscriber = db.fetchone()
 
@@ -57,8 +57,10 @@ def retrieve_newsletter_subscriber(email):
 
 
 def create_newsletter_subscriber(db, email):
-    db.execute('INSERT INTO newsletter_subscriber (email) VALUES (?)',
-               (email,))
+    db.cursor().execute(
+            'INSERT INTO newsletter_subscriber (email) VALUES ((%s))',
+            (email,)
+        )
     db.commit()
 
 

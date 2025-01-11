@@ -85,7 +85,7 @@ def get_post(id, check_author=True):
         """
         SELECT p.id, title, body, created, author, username
         FROM post p JOIN blog_user u ON p.author = u.id
-        WHERE p.id = ?
+        WHERE p.id = (%s)
         """,
         (id,)
     )
@@ -119,8 +119,8 @@ def update(id):
         else:
             db = get_db()
             db.cursor().execute(
-                'UPDATE post SET title = ?, body = ?'
-                ' WHERE id = ?',
+                'UPDATE post SET title = (%s), body = (%s)'
+                ' WHERE id = (%s)',
                 (title, body, id)
             )
             db.commit()
@@ -134,6 +134,6 @@ def update(id):
 def delete(id):
     get_post(id)
     db = get_db()
-    db.cursor().execute('DELETE FROM post WHERE id = ?', (id,))
+    db.cursor().execute('DELETE FROM post WHERE id = (%s)', (id,))
     db.commit()
     return redirect(url_for('blog.index'))
