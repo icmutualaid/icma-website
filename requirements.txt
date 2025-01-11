@@ -1,5 +1,8 @@
+bleach
+coverage
 flask
 flask-ckeditor
+gunicorn
+psycopg2-binary
 pytest
-coverage
-bleach
+werkzeug

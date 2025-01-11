@@ -1,22 +1,21 @@
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS newsletter_subscriber;
-DROP TABLE IF EXISTS post;
+drop table blog_user;
+drop table newsletter_subscriber;
+drop table post;
 
-CREATE TABLE user (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-);
+create table blog_user (
+    id serial primary key,
+    username text unique not null,
+    password text not null
+)
 
-CREATE TABLE newsletter_subscriber (
-    email TEXT UNIQUE NOT NULL
-);
+create table newsletter_subscriber (
+    email text unique not null
+)
 
-CREATE TABLE post (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    author_id INTEGER NOT NULL,
-    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    title TEXT NOT NULL,
-    body TEXT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user (id)
-);
+create table post (
+    id serial primary key,
+    author integer references blog_user,
+    created timestamp not null default current_timestamp,
+    title text not null,
+    body text not null
+)

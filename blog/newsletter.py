@@ -3,7 +3,7 @@ from flask import (
     Blueprint, flash, render_template, request, session
 )
 from flask.cli import with_appcontext
-from sqlite3 import IntegrityError
+# from sqlite3 import IntegrityError
 import sys
 
 from blog.db import get_db
@@ -24,15 +24,16 @@ def signup():
             session['newsletter_subscriber'] = email
             flash('You have successfully signed up for our newsletter. '
                   'Thank you!')
-        except IntegrityError as e:
-            flash('You have already signed up for our newsletter. Thank you! '
-                  'If you are not receiving our emails, please check your '
-                  'spam folder and contact us if you cannot find them.')
-            print(e, file=sys.stderr)
+        # except IntegrityError as e:
+        #     flash('You have already signed up for our newsletter. Thank you! '
+        #           'If you are not receiving our emails, please check your '
+        #           'spam folder and contact us if you cannot find them.')
+        #     print(e, file=sys.stderr)
         except Exception as e:
             flash('An error occurred while trying to subscribe to our '
-                  'newsletter. You have not been added to our email list. '
-                  'Please contact us and let us know about the problem.')
+                  'newsletter. Please check your spam folder and see if you '
+                  'are already receiving our emails. Otherwise, please '
+                  'contact us and let us know about the problem.')
             print(e, file=sys.stderr)
 
     return render_template('newsletter/signup.html')
@@ -40,13 +41,14 @@ def signup():
 
 # return the newsletter_subscriber and any error message
 def retrieve_newsletter_subscriber(email):
-    db = get_db()
+    db = get_db().cursor()
 
     error = None
 
-    newsletter_subscriber = db.execute(
-            'SELECT * FROM newsletter_subscriber WHERE email = ?', (email,)
-        ).fetchone()
+    db.execute(
+            'SELECT * FROM newsletter_subscriber WHERE email = (%s)', (email,)
+        )
+    newsletter_subscriber = db.fetchone()
 
     if newsletter_subscriber is None:
         error = 'Email not found.'
@@ -55,8 +57,10 @@ def retrieve_newsletter_subscriber(email):
 
 
 def create_newsletter_subscriber(db, email):
-    db.execute('INSERT INTO newsletter_subscriber (email) VALUES (?)',
-               (email,))
+    db.cursor().execute(
+            'INSERT INTO newsletter_subscriber (email) VALUES ((%s))',
+            (email,)
+        )
     db.commit()
 
 
@@ -69,7 +73,7 @@ def create_newsletter_subscriber_command(email):
 
     # insert a newsletter_subscriber with these credentials
     if error is None:
-        db = get_db()
+        db = get_db().cursor()
         print(db)
         try:
             create_newsletter_subscriber(db, email)
