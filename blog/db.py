@@ -1,5 +1,5 @@
 import datetime
-import sqlite3
+import psycopg2
 
 import click
 # g is a special object that is unique for each request
@@ -15,9 +15,8 @@ def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(
             current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES,
+            sslmode='require'
         )
-        g.db.row_factory = sqlite3.Row
 
     return g.db
 
@@ -54,57 +53,57 @@ def init_db_command():
     click.echo('Initialized the database.')
 
 
-# Add some recipes for adapters and converters.
-# The default sqlite3 timestamp converter is deprecated.
-def adapt_date_iso(val):
-    """Adapt datetime.date to ISO 8601 date."""
-    return val.isoformat()
+# # Add some recipes for adapters and converters.
+# # The default sqlite3 timestamp converter is deprecated.
+# def adapt_date_iso(val):
+#     """Adapt datetime.date to ISO 8601 date."""
+#     return val.isoformat()
 
 
-def adapt_datetime_iso(val):
-    """Adapt datetime.datetime to timezone-naive ISO 8601 date."""
-    return val.isoformat()
+# def adapt_datetime_iso(val):
+#     """Adapt datetime.datetime to timezone-naive ISO 8601 date."""
+#     return val.isoformat()
 
 
-def adapt_datetime_epoch(val):
-    """Adapt datetime.datetime to Unix timestamp."""
-    return int(val.timestamp())
+# def adapt_datetime_epoch(val):
+#     """Adapt datetime.datetime to Unix timestamp."""
+#     return int(val.timestamp())
 
 
-sqlite3.register_adapter(datetime.date, adapt_date_iso)
-sqlite3.register_adapter(datetime.datetime, adapt_datetime_iso)
-sqlite3.register_adapter(datetime.datetime, adapt_datetime_epoch)
+# sqlite3.register_adapter(datetime.date, adapt_date_iso)
+# sqlite3.register_adapter(datetime.datetime, adapt_datetime_iso)
+# sqlite3.register_adapter(datetime.datetime, adapt_datetime_epoch)
 
 
-def convert_date(val):
-    """Convert sqlite date bytestring to datetime.date object."""
-    return convert_datetime(val).date()
+# def convert_date(val):
+#     """Convert sqlite date bytestring to datetime.date object."""
+#     return convert_datetime(val).date()
 
 
-def convert_datetime(val):
-    """Convert sqlite datetime bytestring to datetime.datetime object."""
-    return sql_time_bytes_to_datetime(val)
+# def convert_datetime(val):
+#     """Convert sqlite datetime bytestring to datetime.datetime object."""
+#     return sql_time_bytes_to_datetime(val)
 
 
-def convert_timestamp(stamp: int | bytes) -> datetime.datetime:
-    """Convert Unix epoch timestamp to datetime.datetime object."""
-    # sqlite3 documentation says we should expect an epoch time in seconds.
-    # But it seems we actually get a datetime bytestring back from the db.
-    # So we should make sure we handle both cases.
-    # Perhaps this is version-specific???
-    if (type(stamp) is int):
-        return datetime.datetime.fromtimestamp(stamp)
-    if (type(stamp) is bytes):
-        return convert_datetime(stamp)
-    raise TypeError('convert_timestamp: invalid argument type '
-                    '(expected int or bytes)')
+# def convert_timestamp(stamp: int | bytes) -> datetime.datetime:
+#     """Convert Unix epoch timestamp to datetime.datetime object."""
+#     # sqlite3 documentation says we should expect an epoch time in seconds.
+#     # But it seems we actually get a datetime bytestring back from the db.
+#     # So we should make sure we handle both cases.
+#     # Perhaps this is version-specific???
+#     if (type(stamp) is int):
+#         return datetime.datetime.fromtimestamp(stamp)
+#     if (type(stamp) is bytes):
+#         return convert_datetime(stamp)
+#     raise TypeError('convert_timestamp: invalid argument type '
+#                     '(expected int or bytes)')
 
 
-# Convert an epoch time into a datetime
-def sql_time_bytes_to_datetime(t):
-    return datetime.datetime.strptime(t.decode(), '%Y-%m-%d %H:%M:%S')
+# # Convert an epoch time into a datetime
+# def sql_time_bytes_to_datetime(t):
+#     return datetime.datetime.strptime(t.decode(), '%Y-%m-%d %H:%M:%S')
 
 
-sqlite3.register_converter("date", convert_date)
-sqlite3.register_converter("datetime", convert_datetime)
-sqlite3.register_converter("timestamp", convert_timestamp)
+# sqlite3.register_converter("date", convert_date)
+# sqlite3.register_converter("datetime", convert_datetime)
+# sqlite3.register_converter("timestamp", convert_timestamp)
