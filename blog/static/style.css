@@ -220,13 +220,12 @@ img {
 }
 
     /* links */
-    a.main {
-        font-weight: bold;
+    a {
         color: var(--link-color);
         text-decoration: underline;
     }
 
-    a.main:hover, a.main:focus {
+    a:hover, a:focus {
         color: var(--link-hover);
         text-decoration: none;
     }
