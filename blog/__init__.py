@@ -34,7 +34,9 @@ def _init_instance(app):
 def _init_config(app, test_config):
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE_URL=os.getenv('DATABASE_URL')
+        DATABASE_URL=os.getenv('DATABASE_URL'),
+        RECAPTCHA_PUBLIC_KEY=os.getenv('RECAPTCHA_PUBLIC_KEY'),
+        RECAPTCHA_PRIVATE_KEY=os.getenv('RECAPTCHA_PRIVATE_KEY'),
     )
 
     if test_config is None:
@@ -59,8 +61,9 @@ def _init_auth(app):
 
 # register newsletter
 def _init_newsletter(app):
-    from . import newsletter
-    newsletter.init_app(app)
+    # from . import newsletter
+    # newsletter.init_app(app)
+    pass
 
 
 # route the request

@@ -6,9 +6,24 @@
 
 {% block content %}
 <h2>Sign up for our mailing list</h2>
+{% if form.errors %}
+    <ul>
+    {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+            <li>{{ field }}: {{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+    </ul>
+{% endif %}
+{% if form.sent %}
+    <p>Thank you for signing up!</p>
+{% endif %}
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
 <form method="post">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-    <input type="submit" value="Sign Up">
+    {{ form.email.label }}
+    {{ form.email }}
+    {{ form.captcha.label }}
+    {{ form.captcha }}
+    {{ form.submit }}
 </form>
 {% endblock %}
