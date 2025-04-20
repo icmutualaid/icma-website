@@ -1,5 +1,6 @@
 bleach
 coverage
+email_validator
 flask
 flask-ckeditor
 flask-wtf
