@@ -355,6 +355,26 @@ img {
         font-size: 1.125rem;
     } 
 
+    /* newsletter archive */
+    .newsletter-archive {
+        display: block;
+
+        .newsletter {
+            /* w/h are fudge numbers based roughly on 11x17 proportions, since that's what a page of the newsletter is. 
+            there is a better way to achieve dynamic resizing, but i didn't want to get more complicated than css right now */
+            width: 50vw;
+            height: 80.5vw;
+            overflow: hidden;
+            border: none;
+            margin-block: 1rem
+        }
+    }
+
+    .issue {
+        width: 100%;
+        display: block;
+    }
+
 /* ==== Responsive Media Queries ==== */
 
 @media screen and (max-width: 1050px) {
@@ -410,8 +430,14 @@ img {
     .content {
         width: 80%;
     }
-}
 
+    .newsletter-archive {
+        .newsletter {
+            width: 80vw;
+            height: 130vw;
+        }
+    }
+}
 @media screen and (max-width: 600px) {
     .location {
         text-align: center;
@@ -429,5 +455,12 @@ img {
 
     .content {
         width: 90%;
+    }
+
+    .newsletter-archive {
+        .newsletter {
+            width: 90vw;
+            height: 148.5vw;
+        }
     }
 }
