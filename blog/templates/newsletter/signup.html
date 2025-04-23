@@ -7,10 +7,7 @@
 {% block content %}
 <h2>Sign up for our mailing list</h2>
 {% if form.errors %}
-    <h3 class="error">Maggie broke something! I'm sorry!</h3>
-    <p>The site failed to submit your email.</p>
-    <p><strong>PLEASE <a href="mailto:admin@icmutualaid.org">click HERE to let us know about the problem</a></strong>, and we can make sure you're signed up. This will help us make sure that other people don't run into the same issue in the future. (You can also right-click or long-press on that link and "Copy Email Address").</p>
-    <p>More info:</p>
+    <p>Failed to submit your email for the following reasons:</p>
     <ul id="newsletter-error-messages">
     {% for field, errors in form.errors.items() %}
         {% for error in errors %}
@@ -18,6 +15,7 @@
         {% endfor %}
     {% endfor %}
     </ul>
+    <p>Check that you've typed your email correctly, try refreshing the page, and make sure you've completed the reCAPTCHA. If you're still having trouble, please tell us about it at <a href="mailto:admin@icmutualaid.org">admin@icmutualaid.org</a>. We'll make sure you're on our list, and you'll help prevent the problem for future visitors.</p>
 {% endif %}
 {% if form.sent %}
     <p>Thank you for signing up!</p>
