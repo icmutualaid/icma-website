@@ -370,9 +370,15 @@ img {
         }
     }
 
-    .issue {
+    .issues {
         width: 100%;
-        display: block;
+        display: flex;
+        flex-wrap: wrap;
+
+        a {
+            padding-right: .75rem;
+            padding-bottom: 1rem;
+        }
     }
 
 /* ==== Responsive Media Queries ==== */
