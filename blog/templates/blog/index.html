@@ -17,10 +17,6 @@
         </div>
         {% if g.user.id == post.author %}
         <a class="action edit" href="{{ url_for('blog.update', id=post.id) }}" aria-label="edit"><i class="fas fa-edit"></i></a>
-        <form id="deleteForm" action="{{ url_for('blog.delete', id=post['id']) }}" method="post"></form>
-        <form method="post">
-            <button class="action delete" type="submit" form="deleteForm" onclick="return confirm('Are you sure?');"><i class="fa-solid fa-trash"></i></button>
-        </form>
         {% endif %}
     </header>
     <p class="body">{{ post.body|safe }}</p>
