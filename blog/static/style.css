@@ -131,14 +131,27 @@ a.navlink:hover, a.navlink:focus {
 .action {
     color: var(--action);
     font-size: 1.25rem;
+    padding-block: 0;
 }
 
 .action.edit {
     padding-right: 0.75rem;
 }
 
+.action.delete {
+    color: var(--delete-btn);
+    padding-inline: 0, 0.75rem;
+    padding-block: 0;
+    border: 0;
+    background-color: transparent;
+}
+
 .action:hover, .action:focus {
     color: var(--action-hover);
+}
+
+.action.delete:hover, .action.delete:focus {
+    color: var(--delete-btn-hover);
 }
 
 /* floating donate button */
