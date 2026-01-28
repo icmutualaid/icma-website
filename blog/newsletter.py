@@ -19,7 +19,8 @@ class NewsletterSignupForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
 
-# associate the url /signup with the signup view function
+@bp.route('/', methods=('GET', 'POST'))
+# deprecated; kept here in case someone has bookmarked it
 @bp.route('/signup', methods=('GET', 'POST'))
 def signup():
     form = NewsletterSignupForm()
