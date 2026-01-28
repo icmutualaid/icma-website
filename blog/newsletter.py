@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, current_app, flash, render_template, session
+    Blueprint, current_app, flash, redirect, render_template, session
 )
 from flask_wtf import FlaskForm, RecaptchaField
 # from sqlite3 import IntegrityError
@@ -28,9 +28,8 @@ class NewsletterSignupForm(FlaskForm):
                 '''
 
 
-# associate the url /signup with the signup view function
-@bp.route('/signup', methods=('GET', 'POST'))
-def signup():
+@bp.route('/', methods=('GET', 'POST'))
+def index():
     form = NewsletterSignupForm(current_app)
     if form.validate_on_submit():
         email = form.email.data
@@ -47,7 +46,13 @@ def signup():
                   'contact us and let us know about the problem.')
             print(e, file=sys.stderr)
 
-    return render_template('newsletter/signup.html', form=form)
+    return render_template('newsletter/index.html', form=form)
+
+
+# redirect old newsletter url
+@bp.route('/signup', methods=('GET', 'POST'))
+def signup_old_routes():
+    return redirect('/newsletter/', code=301)
 
 
 # return the newsletter_subscriber and any error message

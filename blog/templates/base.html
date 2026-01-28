@@ -34,7 +34,7 @@
                 <li><a class="navlink" href="/">Blog</a></li>
                 <li><a class="navlink" href="{{ url_for('content.projects') }}">Projects</a></li>
                 <li><a class="navlink" href="{{ url_for('content.resources') }}">Resources</a></li>
-                <li><a class="navlink" href="{{ url_for('newsletter.signup') }}">Newsletter</a></li>
+                <li><a class="navlink" href="{{ url_for('newsletter.index') }}">Newsletter</a></li>
                 <li><a class="navlink" href="{{ url_for('content.about') }}">About</a></li>
                 {% if g.user %}
                 <li><span>{{ g.user['username'] }}</span></li>
@@ -49,6 +49,7 @@
             </a>
         </div>
     </nav>
+
     <!-- page content -->
     <section class="content">
         <header>
