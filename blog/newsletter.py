@@ -1,8 +1,7 @@
 from flask import (
-    Blueprint, flash, render_template, session
+    Blueprint, current_app, flash, render_template, session
 )
-from flask_wtf import RecaptchaField
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 # from sqlite3 import IntegrityError
 import sys
 from wtforms import StringField, SubmitField
@@ -15,15 +14,24 @@ bp = Blueprint('newsletter', __name__, url_prefix='/newsletter')
 
 class NewsletterSignupForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    captcha = RecaptchaField()
     submit = SubmitField('Sign Up')
+    captcha = RecaptchaField()
+
+    def __init__(self, app, *args, **kwargs):
+        super(NewsletterSignupForm, self).__init__(*args, **kwargs)
+
+        if app.debug:
+            self.captcha.validators = []
+            self.captcha.label = '''
+                This site is running in debug mode.
+                Solving the reCAPTCHA is not required.
+                '''
 
 
-@bp.route('/', methods=('GET', 'POST'))
-# deprecated; kept here in case someone has bookmarked it
+# associate the url /signup with the signup view function
 @bp.route('/signup', methods=('GET', 'POST'))
 def signup():
-    form = NewsletterSignupForm()
+    form = NewsletterSignupForm(current_app)
     if form.validate_on_submit():
         email = form.email.data
         try:
