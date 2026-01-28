@@ -7,6 +7,7 @@ from flask import (
 from flask.cli import with_appcontext
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from blog.cli import init_cli
 from blog.db import get_db
 
 
@@ -89,45 +90,6 @@ def retrieve_user(username, password):
     return user, error
 
 
-def create_user(db, username, password):
-    db.execute(
-            'INSERT INTO blog_user (username, password) '
-            'VALUES ((%s), (%s))',
-            (username, generate_password_hash(password)),
-        )
-    db.commit()
-
-
-# Register a cli command to manually add a blog user
-@click.command('create-user')
-@click.argument('username')
-@click.argument('password')
-@with_appcontext
-def create_user_command(username, password):
-    error = validate_credentials(username, password)
-
-    # insert a user with these credentials
-    if error is None:
-        db = get_db().cursor()
-        print(db)
-        try:
-            create_user(db, username, password)
-            click.echo(f'Successfully registered user {username}.')
-        except db.IntegrityError:
-            click.echo(f'Error: User {username} is already registered.')
-    else:
-        click.echo(f'Error: {error}')
-
-
 def init_app(app):
-    # define the create-user cli command
-    app.cli.add_command(create_user_command)
-
-
-def validate_credentials(username, password):
-    error = None
-    if not username:
-        error = 'Username is required.'
-    elif not password:
-        error = 'Password is required.'
-    return error
+    # define any cli commands
+    init_cli(app)
