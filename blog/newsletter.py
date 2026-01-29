@@ -2,12 +2,12 @@ from flask import (
     Blueprint, current_app, flash, render_template, session
 )
 from flask_wtf import FlaskForm, RecaptchaField
-# from sqlite3 import IntegrityError
 import sys
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Email
 
 from blog.db import get_db
+from psycopg2 import IntegrityError
 
 bp = Blueprint('newsletter', __name__, url_prefix='/newsletter')
 
@@ -20,10 +20,11 @@ class NewsletterSignupForm(FlaskForm):
     def __init__(self, app, *args, **kwargs):
         super(NewsletterSignupForm, self).__init__(*args, **kwargs)
 
-        if app.debug:
+        if app.debug or app.config.get('TESTING'):
             self.captcha.validators = []
             self.captcha.label = '''
-                This site is running in debug mode.
+                This site is running in debug mode,
+                or automated tests are being run.
                 Solving the reCAPTCHA is not required.
                 '''
 
@@ -40,14 +41,24 @@ def signup():
             session['newsletter_subscriber'] = email
             flash('You have successfully signed up for our newsletter. '
                   'Thank you!')
+        except IntegrityError:
+            flash('An error occurred while trying to subscribe to our '
+                  'newsletter. This is likely because your email is '
+                  'already on our list. Please check your spam folder. '
+                  'If you still are not receiving our emails, please '
+                  'contact us and let us know.')
         except Exception as e:
             flash('An error occurred while trying to subscribe to our '
-                  'newsletter. Please check your spam folder and see if you '
-                  'are already receiving our emails. Otherwise, please '
-                  'contact us and let us know about the problem.')
+                  'newsletter. Please let us know about this problem!')
             print(e, file=sys.stderr)
 
     return render_template('newsletter/signup.html', form=form)
+
+
+@bp.route('/', methods=('GET', 'POST'))
+def index():
+    # Allow posting/getting the signup form at the blueprint root
+    return signup()
 
 
 # return the newsletter_subscriber and any error message

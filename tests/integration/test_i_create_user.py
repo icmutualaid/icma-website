@@ -7,7 +7,7 @@ import pytest
     ('testuser', 'testpass', 'Successfully registered', True),
     ('', '', 'Username is required.', False),
     ('a', '', 'Password is required.', False),
-    ('test', 'test', 'already registered', True),
+    ('TEST', 'test', 'already registered', True),
 ))
 def test_integration_create_user(runner, monkeypatch, app,
                                  username, password, message, called):
@@ -16,10 +16,10 @@ def test_integration_create_user(runner, monkeypatch, app,
 
     def fake_create_user(db, username, password):
         Recorder.called = True
-        if username == 'test':
+        if username == 'TEST':
             raise db.IntegrityError('This user already exists')
 
-    monkeypatch.setattr('blog.auth.create_user', fake_create_user)
+    monkeypatch.setattr('blog.cli.create_user', fake_create_user)
 
     with app.app_context():
         result = runner.invoke(

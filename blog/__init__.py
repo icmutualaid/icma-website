@@ -46,6 +46,10 @@ def _init_config(app, test_config):
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
+    # When running tests, disable Flask-WTF CSRF so form posts in tests work
+    if app.config.get('TESTING'):
+        app.config['WTF_CSRF_ENABLED'] = False
+
 
 # register the db
 def _init_db(app):

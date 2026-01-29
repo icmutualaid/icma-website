@@ -13,7 +13,7 @@ def init_cli(app):
 def create_user(db, username, password):
     cursor = db.cursor()
     cursor.execute(
-            'INSERT INTO blog_user (username, password) '
+            'insert into blog_user (username, password) '
             'VALUES ((%s), (%s))',
             (username, generate_password_hash(password)),
         )

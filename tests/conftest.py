@@ -1,12 +1,11 @@
 import os
-import tempfile
 
 import pytest
 from blog import create_app
-from blog.db import get_db, init_db
+from blog.db import get_db
 
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
-    _data_sql = f.read().decode('utf8')
+    test_setup_sql = f.read().decode('utf8')
 
 
 # The app fixture will call the factory
@@ -14,21 +13,25 @@ with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
 # instead of using our local development configuration.
 @pytest.fixture
 def app():
-    db_fd, db_path = tempfile.mkstemp()
+    db_url = os.getenv('DATABASE_URL')
+
+    if not db_url:
+        raise RuntimeError(
+            'Set DATABASE_URL to a Postgres URL before running tests.'
+        )
 
     app = create_app({
         'TESTING': True,
-        'DATABASE_URL': db_path,
+        'DATABASE_URL': db_url,
     })
 
     with app.app_context():
-        init_db()
-        get_db().executescript(_data_sql)
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute(test_setup_sql)
+        db.commit()
 
     yield app
-
-    os.close(db_fd)
-    os.unlink(db_path)
 
 
 @pytest.fixture
@@ -51,7 +54,7 @@ class AuthActions(object):
     def __init__(self, client):
         self._client = client
 
-    def login(self, username='test', password='test'):
+    def login(self, username='TEST', password='test'):
         return self._client.post(
             '/auth/login',
             data={'username': username, 'password': password}

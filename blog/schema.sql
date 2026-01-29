@@ -1,6 +1,6 @@
+drop table if exists post;
 drop table if exists blog_user;
 drop table if exists newsletter_subscriber;
-drop table if exists post;
 
 create table if not exists blog_user (
     id serial primary key,

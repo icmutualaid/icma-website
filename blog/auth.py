@@ -1,11 +1,9 @@
 import functools
 
-import click
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from flask.cli import with_appcontext
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 
 from blog.cli import init_cli
 from blog.db import get_db
@@ -93,3 +91,4 @@ def retrieve_user(username, password):
 def init_app(app):
     # define any cli commands
     init_cli(app)
+
