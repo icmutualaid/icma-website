@@ -219,6 +219,12 @@ img {
     padding-bottom: 1rem;
 }
 
+.subproject {
+    padding-left: 1rem;
+    border-left-style: solid;
+    border-left-color: var(--text-color-gray);
+}
+
     /* links */
     a {
         color: var(--link-color);
