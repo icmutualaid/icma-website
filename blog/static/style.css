@@ -205,6 +205,10 @@ hr {
 img {
     width: 100%;
     max-width: 100%;
+    margin-block: 1rem;
+}
+
+.project-img {
     margin: 0;
 }
 
