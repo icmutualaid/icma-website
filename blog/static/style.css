@@ -218,7 +218,7 @@ hr {
 img {
     width: 100%;
     max-width: 100%;
-    margin-block: 1rem;
+    margin: 0;
 }
 
 .link-container {
@@ -230,6 +230,12 @@ img {
 
 .project {
     padding-bottom: 1rem;
+}
+
+.subproject {
+    padding-left: 1rem;
+    border-left-style: solid;
+    border-left-color: var(--text-color-gray);
 }
 
     /* links */
@@ -367,32 +373,6 @@ img {
         font-weight: bold;
         font-size: 1.125rem;
     } 
-
-    /* newsletter archive */
-    .newsletter-archive {
-        display: block;
-
-        .newsletter {
-            /* w/h are fudge numbers based roughly on 11x17 proportions, since that's what a page of the newsletter is. 
-            there is a better way to achieve dynamic resizing, but i didn't want to get more complicated than css right now */
-            width: 50vw;
-            height: 80.5vw;
-            overflow: hidden;
-            border: none;
-            margin-block: 1rem
-        }
-    }
-
-    .issues {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-
-        a {
-            padding-right: .75rem;
-            padding-bottom: 1rem;
-        }
-    }
 
 /* ==== Responsive Media Queries ==== */
 
