@@ -236,10 +236,17 @@ img {
     padding-bottom: 1rem;
 }
 
-.subproject {
+.subprojects {
     padding-left: 1rem;
     border-left-style: solid;
     border-left-color: var(--text-color-gray);
+    margin-bottom: 1rem;
+}
+
+.three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
 }
 
     /* links */
